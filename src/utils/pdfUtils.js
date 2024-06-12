@@ -1,6 +1,5 @@
-const ticketPDF = () => {
+const ticketEntryPDF = (data, qrData) => {
     const date = new Date();
-
     return [
         { text: "NEPORSA", style: "header" },
         {
@@ -24,7 +23,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "OPERADOR NOMBRE",
+            text: data['USUARIO'],
             style: "bodyText",
         },
         {
@@ -44,7 +43,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "24/05/2024 00:00 - 8896",
+            text: `${new Date(data['FECHA_CICLO']).toLocaleString()} ${data['NUM_CICLO']}`,
             style: "bodyText",
         },
         {
@@ -52,7 +51,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "GT - A-2564785970505",
+            text: `${data['COD_PAIS_PLACA']} ${data['NUMERO_LICENCIA_PILOTO']}`,
             style: "bodyText",
         },
         {
@@ -60,7 +59,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "JONAL ROCAEL LOPEZ ARANA",
+            text: data['NOMBRE_PILOTO'],
             style: "bodyText",
         },
         {
@@ -68,7 +67,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "GT C-232BNP",
+            text: `${data['COD_PAIS_PLACA']} ${data['NUMERO_PLACA']}`,
             style: "bodyText",
         },
         {
@@ -76,7 +75,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "INTERLOGIC SERVICE S.A.",
+            text: data['NOMBRE_TRANSPORTISTA'],
             style: "bodyText",
         },
         {
@@ -84,7 +83,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "CITA WEB",
+            text: data['DESCRIPCION'],
             style: "bodyText",
         },
         {
@@ -96,7 +95,7 @@ const ticketPDF = () => {
             style: "header",
         },
         {
-            text: "REGISTRO 1",
+            text: `REGISTRO ${data['CORRELATIVO9']}`,
             style: "bodyText",
         },
         {
@@ -104,7 +103,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "SEKU9264712",
+            text: data['IDENTIF_CONTENEDOR'],
             style: "bodyText",
         },
         {
@@ -120,7 +119,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "129876-2024",
+            text: `${data['TICKET1']}-${new Date().getFullYear()}`,
             style: "bodyText",
         },
         {
@@ -128,11 +127,11 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "24/05/2024 15:53:30",
+            text: data['FECHA_PESAJE_1'],
             style: "bodyText",
         },
         {
-            text: "BASCULA: 2",
+            text: `BASCULA: ${data['NUM_BASCULA_1']}`,
             style: "bodyText",
         },
         {
@@ -152,11 +151,11 @@ const ticketPDF = () => {
             style: "",
         },
         {
-            text: "ENTRADA: 42.350 TM",
+            text: `ENTRADA: ${data['PESO_BRUTO']}`,
             style: "header",
         },
         {
-            text: "TARA: 3.700 TM",
+            text: `TARA: ${data['PESO_TARA_CONTENED']}`,
             style: "header",
         },
         {
@@ -188,7 +187,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "24/05/2024 16:52:50",
+            text: date.toLocaleString(),
             style: "bodyText",
         },
         {
@@ -196,7 +195,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "HLORELLANA",
+            text: data['USUARIO'],
             style: "bodyText",
         },
         {
@@ -216,7 +215,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "24/05/2024 00:00 - 8214",
+            text: `${new Date(data['FECHA_CICLO']).toLocaleString()} ${data['NUM_CICLO']}`,
             style: "bodyText",
         },
         {
@@ -224,7 +223,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "GT - A-2673752550501",
+            text: `${data['COD_PAIS_PLACA']} ${data['NUMERO_LICENCIA_PILOTO']}`,
             style: "bodyText",
         },
         {
@@ -232,7 +231,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "GERMAN ARTURO LIMA ARRIOLA",
+            text: data['NOMBRE_PILOTO'],
             style: "bodyText",
         },
         {
@@ -240,7 +239,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "GT C-018BST",
+            text: `${data['COD_PAIS_PLACA']} ${data['NUMERO_PLACA']}`,
             style: "bodyText",
         },
         {
@@ -248,7 +247,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "GEDINTER LOGISTICA.",
+            text: data['NOMBRE_TRANSPORTISTA'],
             style: "bodyText",
         },
         {
@@ -256,7 +255,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "CITA WEB",
+            text: data['DESCRIPCION'],
             style: "bodyText",
         },
         {
@@ -268,7 +267,7 @@ const ticketPDF = () => {
             style: "header",
         },
         {
-            text: "REGISTRO 1",
+            text: `REGISTRO ${data['CORRELATIVO9']}`,
             style: "bodyText",
         },
         {
@@ -276,12 +275,8 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "EITU1532969",
+            text: data['IDENTIF_CONTENEDOR'],
             style: "bodyText",
-        },
-        {
-            text: "\n",
-            style: "",
         },
         {
             text: "\n",
@@ -296,7 +291,7 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "324174-2024",
+            text: `${data['TICKET1']}-${new Date().getFullYear()}`,
             style: "bodyText",
         },
         {
@@ -304,11 +299,11 @@ const ticketPDF = () => {
             style: "bodyText",
         },
         {
-            text: "24/05/2024 15:53:30",
+            text: data['FECHA_PESAJE_1'],
             style: "bodyText",
         },
         {
-            text: "BASCULA: 2",
+            text: `BASCULA: ${data['NUM_BASCULA_1']}`,
             style: "bodyText",
         },
         {
@@ -328,18 +323,28 @@ const ticketPDF = () => {
             style: "",
         },
         {
-            text: "ENTRADA: 42.350 TM",
+            text: `ENTRADA: ${data['PESO_BRUTO']}`,
             style: "header",
         },
         {
             text: "CERTIFICADO: BRM-CC-42473/19",
             style: "header",
-        },
-        {
-            text: "VGM: 42350 Kg",
+        }, {
+            text: "BRM-CC-42473/19",
             style: "header",
         },
+        {
+            text: `VGM: ${data['VGM']} Kg`,
+            style: "header",
+        }, {
+            text: "\n",
+            style: "",
+        },
+        {
+            qr: qrData, fit: 170, alignment: "left",
+            margin: [30, 2, 0, 0],
+        }
         // Additional content can be added here
     ]
 }
-export { ticketPDF }
+export { ticketEntryPDF }

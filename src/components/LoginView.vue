@@ -10,7 +10,7 @@
       <input type="password" class="form-control" v-model="password" />
     </div>
     <div class="text-center">
-      <button type="button" class="btn btn-success btn-lg" @click="test">
+      <button type="button" class="btn btn-success btn-lg" @click="login">
         Acceder
       </button>
     </div>
@@ -35,9 +35,12 @@ export default {
       try {
         const { username, password } = this;
         const response = await authService.login({ username, password });
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+        console.log("localStorage", localStorage);
         await linearAlert("Exito", "Ingresado con exito", "success");
         console.log("response", response);
-        this.$emit('logged')
+        this.$emit("logged");
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.log(error);

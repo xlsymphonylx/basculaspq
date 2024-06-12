@@ -36,7 +36,7 @@
   
   <script>
 import cycleService from "@/services/cycleService";
-import { ticketPDF } from "@/utils/pdfUtils";
+import { ticketEntryPDF } from "@/utils/pdfUtils";
 import { linearAlert } from "@/utils/swalAlerts";
 
 export default {
@@ -48,39 +48,65 @@ export default {
   methods: {
     async getCycleData() {
       try {
-        const { date, cycle, correlative } = this;
-        const resCycle = await cycleService.getCycle({
-          date,
+        const username = localStorage.getItem("username");
+        const password = localStorage.getItem("password");
+        const { date, cycle, correlative, transformDate, printPDF } = this;
+        const transformedDate = transformDate(date);
+        console.log("transformedDate", transformedDate);
+        const { data } = await cycleService.getLocalCycle({
+          username,
+          password,
+          date: transformedDate,
           cycle,
           correlative,
         });
         await linearAlert("Exito", "Ingresado con exito", "success");
-        console.log("response", resCycle);
+        let { data: policyData } = await cycleService.getPolicy({
+          cycle,
+          bl: data["BL"],
+        });
+        policyData = policyData["PARAMETROS_SALIDA"];
+        const qrData = `${policyData["POLIZA"]}|${policyData["NUMERO_BL"]}|${policyData["CONSIGNATARIO"]}|${cycle}|${policyData["NUMERO_MANIFIESTO"]}`;
+        console.log("qrData", qrData);
+        printPDF(data, qrData);
+        console.log("response data", data);
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.log(error);
       }
     },
-    printPDF() {
+    transformDate(inputDate) {
+      // Split the input date into its components
+      const [year, month, day] = inputDate.split("-");
+
+      // Get the last two digits of the year
+      const shortYear = year.slice(-2);
+
+      // Format the date in DD/MM/YY
+      const formattedDate = `${day}/${month}/${shortYear}`;
+
+      return formattedDate;
+    },
+    printPDF(data, qrData) {
       const pdfMake = require("pdfmake/build/pdfmake");
       const pdfFonts = require("pdfmake/build/vfs_fonts");
 
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
       const docDefinition = {
         pageMargins: [0, 0, 0, 0],
-        content: ticketPDF(),
+        content: ticketEntryPDF(data, qrData),
         styles: {
           header: {
-            fontSize: 10,
+            fontSize: 14,
             alignment: "left",
             bold: true,
-            margin: [55, 2, 0, 0],
+            margin: [30, 2, 0, 0],
           },
           subheader: {
-            fontSize: 8,
+            fontSize: 12,
             alignment: "left",
             bold: true,
-            margin: [55, 2, 0, 0],
+            margin: [30, 2, 0, 0],
           },
           spacer: {
             fontSize: 10,
@@ -91,7 +117,7 @@ export default {
           bodyText: {
             fontSize: 10,
             alignment: "left",
-            margin: [55, 2, 0, 0],
+            margin: [30, 2, 0, 0],
           },
         },
       };

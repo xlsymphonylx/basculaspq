@@ -3,8 +3,6 @@ import axios from "axios"
 
 export default {
     login({ username, password }) {
-        return axios.post(`${baseUrl}/login?username=${username}&password=${password}`, {
-            username, password
-        })
+        return axios.get(`${baseUrl}/login?username=${username}&password=${password}`)
     }
 }
