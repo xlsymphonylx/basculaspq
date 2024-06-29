@@ -36,7 +36,7 @@
   
   <script>
 import cycleService from "@/services/cycleService";
-import { ticketEntryPDF } from "@/utils/pdfUtils";
+import { ticketEntryPDF,ticketOutPDF } from "@/utils/pdfUtils";
 import { linearAlert } from "@/utils/swalAlerts";
 
 export default {
@@ -66,8 +66,8 @@ export default {
           bl: data["BL"],
         });
         policyData = policyData["PARAMETROS_SALIDA"];
+
         const qrData = `${policyData["POLIZA"]}|${policyData["NUMERO_BL"]}|${policyData["CONSIGNATARIO"]}|${cycle}|${policyData["NUMERO_MANIFIESTO"]}`;
-        console.log("qrData", qrData);
         printPDF(data, qrData);
         console.log("response data", data);
       } catch (error) {
@@ -94,7 +94,7 @@ export default {
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
       const docDefinition = {
         pageMargins: [0, 0, 0, 0],
-        content: ticketEntryPDF(data, qrData),
+        content:   data.FECHA_PESAJE_2? ticketOutPDF(data, qrData):ticketEntryPDF(data, qrData),
         styles: {
           header: {
             fontSize: 14,
