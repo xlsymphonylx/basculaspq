@@ -47,7 +47,14 @@ export default {
     async getEmployeesReport() {
       try {
         const { to, from } = this;
-        const response = await cycleService.getReportEmployees({ to, from });
+        const username = localStorage.getItem("username");
+        const password = localStorage.getItem("password");
+        const response = await cycleService.getReportEmployees({
+          to,
+          from,
+          username,
+          password,
+        });
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
         link.href = url;
