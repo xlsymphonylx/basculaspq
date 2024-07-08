@@ -1,16 +1,16 @@
 <template>
   <div class="bg-secondary p-3 m-3 rounded">
-    <h3 class="text-center text-white fw-bold">Validación de Datos Poliza</h3>
+    <h3 class="text-center text-white fw-bold">Generación de Reporte</h3>
     <div class="row mt-1">
       <div class="col">
         <div class="row">
-          <label class="mb-2 text-white fw-bold">Ciclo</label>
+          <label class="mb-2 text-white fw-bold">Desde</label>
           <div class="col">
-            <input type="text" class="form-control" v-model="cycle" />
+            <input type="text" class="form-control" v-model="from" />
           </div>
-          <label class="mb-2 text-white fw-bold">BL</label>
+          <label class="mb-2 text-white fw-bold">Hacias</label>
           <div class="col">
-            <input type="text" class="form-control" v-model="bl" />
+            <input type="text" class="form-control" v-model="to" />
           </div>
         </div>
       </div>
@@ -20,9 +20,9 @@
       <button
         type="button"
         class="btn btn-primary btn-lg me-2"
-        @click="validatePolicy"
+        @click="getEmployeesReport"
       >
-        Verificar
+        Generar Reporte
       </button>
       <button type="button" class="btn btn-danger btn-lg me-2" @click="goBack">
         Regresar
@@ -30,25 +30,30 @@
     </div>
   </div>
 </template>
-
-<script>
+  
+  <script>
 import cycleService from "@/services/cycleService";
 import { linearAlert } from "@/utils/swalAlerts";
 
 export default {
   data: () => ({
-    cycle: null,
-    bl: null,
+    from: null,
+    to: null,
   }),
   methods: {
     goBack() {
       this.$emit("goBack");
     },
-    async validatePolicy() {
+    async getEmployeesReport() {
       try {
-        const { cycle, bl } = this;
-        const response = await cycleService.getPolicy({ cycle, bl });
-        await linearAlert("Poliza", response, "success");
+        const { to, from } = this;
+        const response = await cycleService.getReportEmployees({ to, from });
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "data.xlsx"); // Filename for the downloaded filedocument.body.appendChild(link);
+        link.click();
+        link.remove();
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.log(error);
@@ -57,6 +62,6 @@ export default {
   },
 };
 </script>
-
-<style>
+  
+  <style>
 </style>

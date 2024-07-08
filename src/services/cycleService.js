@@ -6,5 +6,8 @@ export default {
         return axios.get(`${baseUrl}/get-local-ciclo?username=${username}&password=${password}&numero_ciclo=${cycle}&fecha=${date}&correlativo=${correlative}`)
     }, getPolicy({ cycle, bl }) {
         return axios.get(`${baseUrl}/get-datos-poliza?numero_ciclo=${cycle}&bl=${bl}`)
-    }
+    }, getReportEmployees({ to, from }) {
+        return axios.get(`${baseUrl}/get-excel?to=${to}&from=${from}`, { responseType: "blob" })
+    },
+
 }

@@ -30,13 +30,16 @@
       >
         Verificar
       </button>
+      <button type="button" class="btn btn-danger btn-lg me-2" @click="goBack">
+        Regresar
+      </button>
     </div>
   </div>
 </template>
   
   <script>
 import cycleService from "@/services/cycleService";
-import { ticketEntryPDF,ticketOutPDF } from "@/utils/pdfUtils";
+import { ticketEntryPDF, ticketOutPDF } from "@/utils/pdfUtils";
 import { linearAlert } from "@/utils/swalAlerts";
 
 export default {
@@ -46,6 +49,9 @@ export default {
     correlative: null,
   }),
   methods: {
+    goBack() {
+      this.$emit("goBack");
+    },
     async getCycleData() {
       try {
         const username = localStorage.getItem("username");
@@ -94,7 +100,9 @@ export default {
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
       const docDefinition = {
         pageMargins: [0, 0, 0, 0],
-        content:   data.FECHA_PESAJE_2? ticketOutPDF(data, qrData):ticketEntryPDF(data, qrData),
+        content: data.FECHA_PESAJE_2
+          ? ticketOutPDF(data, qrData)
+          : ticketEntryPDF(data, qrData),
         styles: {
           header: {
             fontSize: 14,

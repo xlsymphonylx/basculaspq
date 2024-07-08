@@ -34,12 +34,10 @@ export default {
     async login() {
       try {
         const { username, password } = this;
-        const response = await authService.login({ username, password });
+        await authService.login({ username, password });
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
-        console.log("localStorage", localStorage);
         await linearAlert("Exito", "Ingresado con exito", "success");
-        console.log("response", response);
         this.$emit("logged");
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
