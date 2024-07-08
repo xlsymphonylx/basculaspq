@@ -30,7 +30,7 @@ export default {
     ReportView,
   },
   data: () => ({
-    view: 3,
+    view: 4,
   }),
   methods: {
     async logout() {
