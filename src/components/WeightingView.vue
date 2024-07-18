@@ -1055,11 +1055,12 @@ export default {
           !checkObject(appointmentData) ||
           (!appointmentData["CITA"] && !appointmentData["PESOS"])
         ) {
-          if (this.isContainerNumberSet && showWarning) {
-            await linearToast(
-              `Cita de contenedor no encontrada ${this.containerNumber}, proceda`,
-              "success"
-            );
+          if (this.isContainerNumberSet) {
+            if (showWarning)
+              await linearToast(
+                `Cita de contenedor no encontrada ${this.containerNumber}, proceda`,
+                "success"
+              );
           }
           return;
         } else {
@@ -1114,9 +1115,11 @@ export default {
     },
     calculatedContainerNetWeight() {
       return (
-        Number.parseFloat(this.movementExitWeight) -
-        (Number.parseFloat(this.movementEntryWeight) +
-          Number.parseFloat(this.containerTaraWeight)) || null
+        (
+          Number.parseFloat(this.movementExitWeight) -
+          (Number.parseFloat(this.movementEntryWeight) +
+            Number.parseFloat(this.containerTaraWeight))
+        ).toFixed(2) || null
       );
     },
   },

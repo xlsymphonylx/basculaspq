@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-const linearAlert = async (title, text, icon = 'success', timeout = 400000, allowOutsideClick = true) => {
+const linearAlert = async (title, text, icon = 'success', timeout = 4000, allowOutsideClick = true) => {
     return await Swal.fire({
         title: title,
         html: text,
