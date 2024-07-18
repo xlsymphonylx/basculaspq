@@ -1,20 +1,20 @@
 <template>
-  <div class="bg-secondary p-3 m-3 rounded">
-    <h3 class="text-center text-white fw-bold">Impresión de Boleta DUCA</h3>
+  <div class="bg-white p-3 m-3 rounded">
+    <h3 class="text-center text-dark fw-bold">Impresión de Boleta DUCA</h3>
     <div class="row mt-1">
       <div class="col">
         <div class="row">
-          <label class="mb-2 text-white fw-bold">Ciclo</label>
+          <label class="mb-2 text-dark fw-bold">Ciclo</label>
           <div class="col">
             <input type="text" class="form-control" v-model="cycle" />
           </div>
-          <label class="mb-2 text-white fw-bold">Numero de Registro</label>
+          <label class="mb-2 text-dark fw-bold">Numero de Registro</label>
           <div class="col">
             <input type="text" class="form-control" v-model="correlative" />
           </div>
         </div>
         <div class="row">
-          <label class="mb-2 text-white fw-bold">Fecha</label>
+          <label class="mb-2 text-dark fw-bold">Fecha</label>
           <div class="col">
             <input type="date" class="form-control" v-model="date" />
           </div>

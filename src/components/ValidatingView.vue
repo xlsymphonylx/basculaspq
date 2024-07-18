@@ -47,8 +47,16 @@ export default {
     async validatePolicy() {
       try {
         const { cycle, bl } = this;
-        const response = await cycleService.getPolicy({ cycle, bl });
-        await linearAlert("Poliza", response, "success");
+        const { data: response } = await cycleService.getPolicy({ cycle, bl });
+        const { TIPO_RESPUESTA } = response;
+        if (TIPO_RESPUESTA["RESULTADO"] === "01")
+          await linearAlert("Poliza", TIPO_RESPUESTA["DESCRIPCION"], "success");
+        else
+          await linearAlert(
+            "Advertencia",
+            TIPO_RESPUESTA["DESCRIPCION"],
+            "warning"
+          );
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.log(error);
