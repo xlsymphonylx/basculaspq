@@ -185,21 +185,7 @@
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="row">
-            <label class="mb-2 text-black fw-bold">Peso Salida</label>
-            <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementExitWeight"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-1">
+
         <div class="col">
           <div class="row">
             <label class="mb-2 text-black fw-bold">Tiempo Entrada</label>
@@ -270,6 +256,19 @@
         </div>
       </div>
       <div class="row mt-1 border-bottom pb-2">
+        <div class="col">
+          <div class="row">
+            <label class="mb-2 text-black fw-bold">Peso Salida</label>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                readonly
+                v-model="movementExitWeight"
+              />
+            </div>
+          </div>
+        </div>
         <div class="col">
           <div class="row">
             <label class="mb-2 text-black fw-bold">Tiempo Salida</label>
@@ -356,7 +355,9 @@
                 class="form-control writeable"
                 v-model="containerNumber"
                 tabindex="2"
+                @keyup.enter="checkAppointment"
                 @change="checkAppointment"
+                :disabled="isLoading"
               />
             </div>
           </div>
@@ -370,6 +371,7 @@
                 class="form-control writeable"
                 tabindex="3"
                 v-model="containerTaraWeight"
+                :disabled="isLoading"
               />
             </div>
           </div>
@@ -384,7 +386,7 @@
                 type="text"
                 class="form-control"
                 readonly
-                v-model="containerLoadNetWeight"
+                v-model="calculatedContainerNetWeight"
               />
             </div>
           </div>
@@ -426,6 +428,7 @@
                 class="form-control writeable"
                 tabindex="4"
                 v-model="containerObservations"
+                :disabled="isLoading"
               />
             </div>
           </div>
@@ -578,6 +581,7 @@ export default {
   data: () => ({
     isLoading: false,
     lastCycle: 1,
+    VGM: "",
     //header
     headerCycle: null,
     headerCycleDate: null,
@@ -718,6 +722,7 @@ export default {
       BOLETA_PESO_SALIDA,
       REGISTROS,
       TICKET_FAC2,
+      VGM,
     }) {
       const entryDate = splitDate(FECHA_PESO_ENTRADA);
       const exitDate = splitDate(FECHA_PESO_SALIDA);
@@ -739,6 +744,10 @@ export default {
 
       //ultimo cyclo
       this.lastCycle = Number.parseInt(REGISTROS);
+
+      //VGM
+
+      this.VGM = VGM;
     },
     setContainerData({
       NUMERO_CONTENEDOR,
@@ -920,7 +929,7 @@ export default {
         }
 
         await linearToast(`Recopilación de datos de ciclo exitoso!`, "success");
-        await this.checkAppointment();
+        await this.checkAppointment(false);
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.log(error);
@@ -1029,7 +1038,7 @@ export default {
         );
       }
     },
-    async checkAppointment() {
+    async checkAppointment(showWarning = true) {
       this.isLoading = true;
       //funciones de datos
       const { getAppointment } = this;
@@ -1046,7 +1055,7 @@ export default {
           !checkObject(appointmentData) ||
           (!appointmentData["CITA"] && !appointmentData["PESOS"])
         ) {
-          if (this.isContainerNumberSet) {
+          if (this.isContainerNumberSet && showWarning) {
             await linearToast(
               `Cita de contenedor no encontrada ${this.containerNumber}, proceda`,
               "success"
@@ -1102,6 +1111,13 @@ export default {
     },
     isGoBackARegistryNumberPossible() {
       return this.movementRegistryNumber > 1;
+    },
+    calculatedContainerNetWeight() {
+      return (
+        Number.parseFloat(this.movementExitWeight) -
+        (Number.parseFloat(this.movementEntryWeight) +
+          Number.parseFloat(this.containerTaraWeight)) || null
+      );
     },
   },
 };
