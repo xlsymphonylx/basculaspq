@@ -1103,6 +1103,7 @@ export default {
       const basculaNumber = localStorage.getItem("bascula");
 
       const { data } = await weightService.weight({ basculaNumber });
+      await linearAlert(`Advertencia`, `Peso ${data}`, "warning");
       console.log("peso", data);
     },
   },
