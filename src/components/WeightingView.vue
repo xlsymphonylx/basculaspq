@@ -528,7 +528,7 @@
     <div
       class="row text-center mt-4 justify-content-center gap-3 overflow-auto p-2"
     >
-      <div class="btn-group" role="group" aria-label="Basic example">
+      <div class="btn-group" role="group">
         <button
           type="button"
           class="btn btn-lg btn-primary"
@@ -559,6 +559,9 @@
         >
           Ultimo
         </button>
+      </div>
+
+      <div class="btn-group" role="group">
         <button type="button" class="btn btn-warning btn-lg" @click="resetData">
           Limpiar
         </button>
@@ -566,7 +569,16 @@
         ><button type="button" class="btn btn-danger btn-lg" @click="goBack">
           Regresar
         </button>
-        <button type="button" class="btn btn-info btn-lg">Pesar</button>
+        <button type="button" class="btn btn-info btn-lg" @click="checkWeight">
+          Pesar
+        </button>
+        <button
+          type="button"
+          class="btn btn-info btn-lg"
+          @click="checkAppointment"
+        >
+          Verificar Cita
+        </button>
       </div>
     </div>
   </div>
@@ -574,9 +586,9 @@
 
 <script>
 import cycleService from "@/services/cycleService";
+import weightService from "@/services/weightService";
 import { linearAlert, linearToast } from "@/utils/swalAlerts";
 import { splitDate } from "@/utils/timeUtils";
-
 export default {
   data: () => ({
     isLoading: false,
@@ -915,21 +927,16 @@ export default {
         setMovementData(weightData);
         if (getLastCycle && checkRegistryNumber()) {
           await linearToast(
-            `Atención, numero de registro ${
-              this.movementRegistryNumber
-            }, ya contiene pesajes de salida y entrada, pasando al ultimo registro disponible, registro ${
-              this.lastCycle + 1
-            }`,
+            `Atención, numero de registro ${this.movementRegistryNumber}, ya contiene pesajes de salida y entrada, pasando al ultimo registro disponible, registro ${this.lastCycle}`,
             "warning"
           );
-          this.movementRegistryNumber = this.lastCycle + 1;
+          this.movementRegistryNumber = this.lastCycle;
           weightData = await getWeightData();
           setContainerData(weightData);
           setMovementData(weightData);
         }
 
         await linearToast(`Recopilación de datos de ciclo exitoso!`, "success");
-        await this.checkAppointment(false);
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.log(error);
@@ -1038,7 +1045,7 @@ export default {
         );
       }
     },
-    async checkAppointment(showWarning = true) {
+    async checkAppointment() {
       this.isLoading = true;
       //funciones de datos
       const { getAppointment } = this;
@@ -1056,11 +1063,10 @@ export default {
           (!appointmentData["CITA"] && !appointmentData["PESOS"])
         ) {
           if (this.isContainerNumberSet) {
-            if (showWarning)
-              await linearToast(
-                `Cita de contenedor no encontrada ${this.containerNumber}, proceda`,
-                "success"
-              );
+            await linearToast(
+              `Cita de contenedor no encontrada ${this.containerNumber}, proceda`,
+              "success"
+            );
           }
           return;
         } else {
@@ -1092,6 +1098,12 @@ export default {
       this.movementRegistryNumber = this.movementRegistryNumber + 1;
       console.log("this.movementRegistryNumber", this.movementRegistryNumber);
       this.getHeaderAndWeightData(false, false);
+    },
+    async checkWeight() {
+      const basculaNumber = localStorage.getItem("bascula");
+
+      const { data } = await weightService.weight({ basculaNumber });
+      console.log("peso", data);
     },
   },
   computed: {
