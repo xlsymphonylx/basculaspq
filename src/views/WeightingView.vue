@@ -800,7 +800,7 @@ export default {
           return null;
         } catch (error) {
           await linearAlert("Error", error, "error", 3000, false);
-          console.log(error);
+          console.error(error);
           return null;
         }
       }
@@ -826,7 +826,7 @@ export default {
           return null;
         } catch (error) {
           await linearAlert("Error", error, "error", 3000, false);
-          console.log(error);
+          console.error(error);
           return null;
         }
       }
@@ -852,7 +852,7 @@ export default {
           return null;
         } catch (error) {
           await linearAlert("Error", error, "error", 3000, false);
-          console.log(error);
+          console.error(error);
           return null;
         }
       }
@@ -875,7 +875,7 @@ export default {
           return null;
         } catch (error) {
           await linearAlert("Error", error, "error", 3000, false);
-          console.log(error);
+          console.error(error);
           return null;
         }
       }
@@ -939,7 +939,7 @@ export default {
         await linearToast(`Recopilación de datos de ciclo exitoso!`, "success");
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
-        console.log(error);
+        console.error(error);
       } finally {
         this.isLoading = false;
       }
@@ -986,7 +986,7 @@ export default {
         );
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
-        console.log(error);
+        console.error(error);
       } finally {
         this.isLoading = false;
       }
@@ -1009,7 +1009,7 @@ export default {
         await linearToast(`Recopilación de datos de ciclo exitoso!`, "success");
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
-        console.log(error);
+        console.error(error);
       } finally {
         this.isLoading = false;
       }
@@ -1034,7 +1034,7 @@ export default {
           return null;
         } catch (error) {
           await linearAlert("Error", error, "error", 3000, false);
-          console.log(error);
+          console.error(error);
           return null;
         }
       } else {
@@ -1078,7 +1078,7 @@ export default {
         }
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
-        console.log(error);
+        console.error(error);
       } finally {
         this.isLoading = false;
       }
@@ -1096,15 +1096,36 @@ export default {
     },
     goUpARegistryNumber() {
       this.movementRegistryNumber = this.movementRegistryNumber + 1;
-      console.log("this.movementRegistryNumber", this.movementRegistryNumber);
+
       this.getHeaderAndWeightData(false, false);
     },
     async checkWeight() {
-      const basculaNumber = localStorage.getItem("bascula");
+      try {
+        const basculaNumber = localStorage.getItem("bascula");
+        const { data } = await weightService.weight({ basculaNumber });
+        // eslint-disable-next-line
+        const [peso, maquina] = data.split("-");
 
-      const { data } = await weightService.weight({ basculaNumber });
-      await linearAlert(`Advertencia`, `Peso ${data}`, "warning");
-      console.log("peso", data);
+        if (peso) {
+          const formattedPeso_Carga = (Number.parseFloat(peso) / 1000).toFixed(
+            3
+          );
+          await linearAlert(
+            `Advertencia`,
+            `Peso ${formattedPeso_Carga}`,
+            "warning"
+          );
+        } else {
+          await linearAlert(
+            "ERROR AL LEER PESO",
+            "Error al Leer Peso, Intente de Nuevamente",
+            "error"
+          );
+        }
+      } catch (error) {
+        console.error("Error in checkWeight:", error);
+        await linearAlert("ERROR", "An unexpected error occurred", "error");
+      }
     },
   },
   computed: {
@@ -1127,13 +1148,19 @@ export default {
       return this.movementRegistryNumber > 1;
     },
     calculatedContainerNetWeight() {
-      return (
-        (
+      if (
+        this.movementExitWeight &&
+        this.movementEntryWeight &&
+        this.containerTaraWeight
+      ) {
+        return (
           Number.parseFloat(this.movementExitWeight) -
           (Number.parseFloat(this.movementEntryWeight) +
             Number.parseFloat(this.containerTaraWeight))
-        ).toFixed(2) || null
-      );
+        ).toFixed(2);
+      } else {
+        return null;
+      }
     },
   },
 };

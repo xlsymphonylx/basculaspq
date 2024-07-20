@@ -18,7 +18,13 @@
     </div>
     <div class="mb-3">
       <label class="form-label">Bascula</label>
-      <select type="text" class="form-control" v-model="bascula">
+      <select
+        type="text"
+        class="form-control"
+        v-model="bascula"
+        @keyup.enter="login"
+        @change="login"
+      >
         <option value="0" selected>Seleccionar Opción</option>
         <option value="1">Bascula 1</option>
         <option value="2">Bascula 2</option>
@@ -72,7 +78,7 @@ export default {
         }
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
-        console.log(error);
+        console.error(error);
       }
     },
   },

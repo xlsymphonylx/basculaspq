@@ -1,37 +1,29 @@
 <template>
   <div id="app">
-    <div class="content">
-      <LoginView v-if="view === 0" @logged="navigate(4)" />
-      <WeightingView v-if="view === 1" @goBack="navigate(4)" />
-      <PrintView v-if="view === 2" @goBack="navigate(4)" />
-      <NullWeightView v-if="view === 3" @goBack="navigate(4)" />
-      <LocalMenu
-        v-if="view === 4"
-        @logout="logout"
-        :navigationHandle="navigate"
-      />
+    <div class="content" v-if="!isLoggedIn">
+      <LoginView @logged="navigate" />
     </div>
+    <NavBar @logout="logout" v-else>
+      <div class="content">
+        <router-view></router-view>
+      </div>
+    </NavBar>
   </div>
 </template>
 
 <script>
-import LocalMenu from "./components/LocalMenu.vue";
-import LoginView from "./components/LoginView.vue";
-import NullWeightView from "./components/NullWeightView.vue";
-import PrintView from "./components/PrintView.vue";
-import WeightingView from "./components/WeightingView.vue";
+import LoginView from "./views/LoginView.vue";
+import NavBar from "@/components/NavBar.vue";
+
 import { linearAlert } from "./utils/swalAlerts";
 export default {
   name: "App",
   components: {
-    WeightingView,
     LoginView,
-    NullWeightView,
-    LocalMenu,
-    PrintView,
+    NavBar,
   },
   data: () => ({
-    view: 0,
+    isLoggedIn: false,
   }),
   methods: {
     async logout() {
@@ -40,15 +32,16 @@ export default {
         localStorage.setItem("username", undefined);
         localStorage.setItem("password", undefined);
         await linearAlert("Exito", "Sesión cerrada con exito", "success");
-        this.view = 0;
+        this.$router.push("/");
+        this.isLoggedIn = false;
         console.log("end logout");
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
-        console.log(error);
+        console.error(error);
       }
     },
-    navigate(viewId) {
-      this.view = viewId;
+    navigate() {
+      this.isLoggedIn = true;
     },
   },
 };

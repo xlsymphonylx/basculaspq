@@ -58,7 +58,6 @@ export default {
         const password = localStorage.getItem("password");
         const { date, cycle, correlative, transformDate, printPDF } = this;
         const transformedDate = transformDate(date);
-        console.log("transformedDate", transformedDate);
         const { data } = await cycleService.getLocalCycle({
           username,
           password,
@@ -75,10 +74,9 @@ export default {
 
         const qrData = `${policyData["POLIZA"]}|${policyData["NUMERO_BL"]}|${policyData["CONSIGNATARIO"]}|${cycle}|${policyData["NUMERO_MANIFIESTO"]}`;
         printPDF(data, qrData);
-        console.log("response data", data);
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
-        console.log(error);
+        console.error(error);
       }
     },
     transformDate(inputDate) {

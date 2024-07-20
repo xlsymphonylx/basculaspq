@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     logoutHandle() {
-      console.log("logout handle");
       this.$emit("logout");
     },
   },

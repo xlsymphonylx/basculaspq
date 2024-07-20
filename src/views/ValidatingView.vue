@@ -59,7 +59,7 @@ export default {
           );
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
-        console.log(error);
+        console.error(error);
       }
     },
   },

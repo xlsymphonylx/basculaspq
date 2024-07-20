@@ -22,7 +22,6 @@ function formatDateToPortStandard(inputDate) {
 
     // Format the date and time as dd/MM/yyyy HH24:mm:ss
     const formattedDateTime = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-    console.log(formattedDateTime);
     return formattedDateTime;
 }
 
