@@ -18,10 +18,9 @@ export default {
         yesterday.setDate(yesterday.getDate() - 1);
 
         // Format dates in YYYY-MM-DD format
-        const formatDate = (date) => date.toISOString().split("T")[0];
 
-        const toParsed = formatDate(nowCST);
-        const fromParsed = formatDate(yesterday);
+        const toParsed = this.transformDate(nowCST);
+        const fromParsed = this.transformDate(yesterday);
         const username = localStorage.getItem("username");
         const password = localStorage.getItem("password");
         const { data } = graphService.dailyWeights({
@@ -35,6 +34,18 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    transformDate(inputDate) {
+      // Split the input date into its components
+      const [year, month, day] = inputDate.split("-");
+
+      // Get the last two digits of the year
+      const shortYear = year.slice(-2);
+
+      // Format the date in DD/MM/YY
+      const formattedDate = `${day}/${month}/${shortYear}`;
+
+      return formattedDate;
     },
   },
   mounted() {
