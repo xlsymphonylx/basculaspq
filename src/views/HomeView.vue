@@ -18,12 +18,13 @@ export default {
         yesterday.setDate(yesterday.getDate() - 1);
 
         // Format dates in YYYY-MM-DD format
-
         const toParsed = this.transformDate(nowCST);
         const fromParsed = this.transformDate(yesterday);
+
         const username = localStorage.getItem("username");
         const password = localStorage.getItem("password");
-        const { data } = graphService.dailyWeights({
+
+        const { data } = await graphService.dailyWeights({
           to: toParsed,
           from: fromParsed,
           username,
@@ -36,14 +37,13 @@ export default {
       }
     },
     transformDate(inputDate) {
-      // Split the input date into its components
-      const [year, month, day] = inputDate.split("-");
-
-      // Get the last two digits of the year
-      const shortYear = year.slice(-2);
+      // Get the components of the date
+      const day = String(inputDate.getDate()).padStart(2, "0");
+      const month = String(inputDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+      const year = String(inputDate.getFullYear()).slice(-2); // Get last 2 digits of year
 
       // Format the date in DD/MM/YY
-      const formattedDate = `${day}/${month}/${shortYear}`;
+      const formattedDate = `${day}/${month}/${year}`;
 
       return formattedDate;
     },
