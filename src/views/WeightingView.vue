@@ -247,8 +247,7 @@
             <div class="col">
               <input
                 type="text"
-                class="form-control"
-                readonly
+                class="form-control writeable"
                 v-model="movementEntryTicket"
               />
             </div>
@@ -330,8 +329,7 @@
             <div class="col">
               <input
                 type="text"
-                class="form-control"
-                readonly
+                class="form-control writeable"
                 v-model="movementExitTicket"
               />
             </div>
@@ -565,10 +563,7 @@
         <button type="button" class="btn btn-warning btn-lg" @click="resetData">
           Limpiar
         </button>
-        <button type="button" class="btn btn-success btn-lg">Guardar</button
-        ><button type="button" class="btn btn-danger btn-lg" @click="goBack">
-          Regresar
-        </button>
+        <button type="button" class="btn btn-success btn-lg">Guardar</button>
         <button type="button" class="btn btn-info btn-lg" @click="checkWeight">
           Pesar
         </button>
@@ -587,7 +582,11 @@
 <script>
 import cycleService from "@/services/cycleService";
 import weightService from "@/services/weightService";
-import { linearAlert, linearToast } from "@/utils/swalAlerts";
+import {
+  linearAlert,
+  linearToast,
+  linearConfirmationAlert,
+} from "@/utils/swalAlerts";
 import { splitDate } from "@/utils/timeUtils";
 export default {
   data: () => ({
@@ -642,9 +641,6 @@ export default {
     checkObject(obj) {
       // Check if obj is a non-null object with at least one property
       return obj && typeof obj === "object" && Object.keys(obj).length > 0;
-    },
-    goBack() {
-      this.$emit("goBack");
     },
     resetData() {
       this.isLoading = false;
@@ -782,6 +778,12 @@ export default {
     setBlNumber({ BL }) {
       this.policyBlNumber = BL;
     },
+    setNewWeightData() {
+      const { weightDirection } = this;
+
+      console.log("weightDirection", weightDirection);
+    },
+    getNewWeightData() {},
     async getCycle() {
       if (this.isCycleNumberSet) {
         const { headerCycle } = this;
@@ -1083,6 +1085,30 @@ export default {
         this.isLoading = false;
       }
     },
+    async getCorrelative() {
+      const basculaNumber = localStorage.getItem("bascula");
+      try {
+        const { data } = await cycleService.getCorrelative({
+          basculaNumber,
+          companyNumber: 25,
+        });
+        const { TIPO_RESPUESTA } = data;
+        if (TIPO_RESPUESTA["RESULTADO"] === "01") {
+          const { PARAMETROS_SALIDA } = data;
+          return PARAMETROS_SALIDA;
+        } else
+          await linearAlert(
+            "Advertencia",
+            TIPO_RESPUESTA["DESCRIPCION"],
+            "warning"
+          );
+        return null;
+      } catch (error) {
+        await linearAlert("Error", error, "error", 3000, false);
+        console.error(error);
+        return null;
+      }
+    },
     checkRegistryNumber() {
       return this.lastCycle !== 1;
     },
@@ -1110,11 +1136,19 @@ export default {
           const formattedPeso_Carga = (Number.parseFloat(peso) / 1000).toFixed(
             3
           );
-          await linearAlert(
-            `Advertencia`,
+          const { isConfirmed } = await linearConfirmationAlert(
             `Peso ${formattedPeso_Carga}`,
-            "warning"
+            `Confirmar Peso`,
+            "warning",
+            "Confirmar",
+            "Volver A Pesar"
           );
+
+          if (isConfirmed) {
+            const correlative = await this.getCorrelative();
+            console.log("correlative", correlative);
+            this.setNewWeightData();
+          } else this.checkWeight();
         } else {
           await linearAlert(
             "ERROR AL LEER PESO",
@@ -1125,6 +1159,23 @@ export default {
       } catch (error) {
         console.error("Error in checkWeight:", error);
         await linearAlert("ERROR", "An unexpected error occurred", "error");
+      }
+    },
+    async createCycleRegistry() {
+      this.isLoading = true;
+      //validaciones
+      const { checkObject } = this;
+      const { allInputData } = this;
+      try {
+        await linearToast(
+          `Atención, ingresando ciclo en base de datos local`,
+          "warning"
+        );
+      } catch (error) {
+        await linearAlert("Error", error, "error", 3000, false);
+        console.error(error);
+      } finally {
+        this.isLoading = false;
       }
     },
   },
@@ -1147,6 +1198,14 @@ export default {
     isGoBackARegistryNumberPossible() {
       return this.movementRegistryNumber > 1;
     },
+    weightDirection() {
+      const { movementEntryWeight, movementExitWeight } = this;
+      return movementEntryWeight === "0"
+        ? "ENTRADA"
+        : movementExitWeight === "0"
+        ? "SALIDA"
+        : "NINGUNO";
+    },
     calculatedContainerNetWeight() {
       if (
         this.movementExitWeight &&
@@ -1162,6 +1221,97 @@ export default {
         return null;
       }
     },
+    allInputData() {
+      const {
+        headerCycle,
+        headerCycleDate,
+        headerCompany,
+        headerLicenseNumber,
+        headerLicenseCountry,
+        headerPilot,
+        headerPlateCountry,
+        headerPlateNumber,
+        headerObservation,
+        headerTruckType,
+        headerEntryDate,
+        headerEntryHour,
+        //movements
+        movementRegistryNumber,
+        movementEntryWeight,
+        movementExitWeight,
+        movementEntryDate,
+        movementEntryTime,
+        movementExitDate,
+        movementExitTime,
+        movementEntryBascName,
+        movementEntryBascNumber,
+        movementExitBascName,
+        movementExitBascNumber,
+        movementEntryBoleta,
+        movementExitBoleta,
+        movementEntryTicket,
+        movementExitTicket,
+        //container
+        containerNumber,
+        containerTaraWeight,
+        containerLoadNetWeight,
+        containerShip,
+        containerLoadType,
+        containerObservations,
+        //policy
+        policyDucaNumber,
+        policyBlNumber,
+        policyCosignee,
+        policyManifest,
+        policyNumber,
+        policyWeight,
+      } = this;
+
+      return {
+        headerCycle,
+        headerCycleDate,
+        headerCompany,
+        headerLicenseNumber,
+        headerLicenseCountry,
+        headerPilot,
+        headerPlateCountry,
+        headerPlateNumber,
+        headerObservation,
+        headerTruckType,
+        headerEntryDate,
+        headerEntryHour,
+        //movements
+        movementRegistryNumber,
+        movementEntryWeight,
+        movementExitWeight,
+        movementEntryDate,
+        movementEntryTime,
+        movementExitDate,
+        movementExitTime,
+        movementEntryBascName,
+        movementEntryBascNumber,
+        movementExitBascName,
+        movementExitBascNumber,
+        movementEntryBoleta,
+        movementExitBoleta,
+        movementEntryTicket,
+        movementExitTicket,
+        //container
+        containerNumber,
+        containerTaraWeight,
+        containerLoadNetWeight,
+        containerShip,
+        containerLoadType,
+        containerObservations,
+        //policy
+        policyDucaNumber,
+        policyBlNumber,
+        policyCosignee,
+        policyManifest,
+        policyNumber,
+        policyWeight,
+      };
+    },
   },
 };
 </script>
@@ -1175,5 +1325,9 @@ input:not(.writeable) {
   color: rgb(0, 0, 0);
   border: rgb(251, 253, 255);
   font-weight: bold;
+}
+
+.swal2-title {
+  font-size: 24px !important; /* Change the size as needed */
 }
 </style>

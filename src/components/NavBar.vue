@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100vw">
+  <div style="width: 100vw" class="mt-2">
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow rounded">
       <div class="container-fluid">
         <div class="d-flex justify-content-center align-items-center">
@@ -31,7 +31,7 @@
             </li>
           </ul>
           <li
-            class="nav-item text-danger ms-auto"
+            class="nav-item text-danger ms-auto my-2"
             style="list-style-type: none"
           >
             <div class="nav-link" @click="logoutHandle">Cerrar Sesión</div>

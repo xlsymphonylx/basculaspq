@@ -71,8 +71,12 @@
       >
         Anular Pesaje
       </button>
-      <button type="button" class="btn btn-danger btn-lg me-2" @click="goBack">
-        Regresar
+      <button
+        type="button"
+        class="btn btn-danger btn-lg me-2"
+        @click="resetData"
+      >
+        Limpiar
       </button>
     </div>
   </div>
@@ -93,8 +97,13 @@ export default {
     nullWeightingType: null,
   }),
   methods: {
-    goBack() {
-      this.$emit("goBack");
+    resetData() {
+      this.nullCycle = null;
+      this.nullCycleDate = null;
+      this.nullContainerType = null;
+      this.nullRegistryNumber = null;
+      this.nullWeightingType = null;
+      this.isLoading = false;
     },
     async nullWeight() {
       if (this.isFormValid) {

@@ -32,6 +32,94 @@ export default {
         return axios.get(`${baseUrl}/get-datos-salida?no_duca=${duca}`)
     }, getAppointment({ containerNumber }) {
         return axios.get(`${baseUrl}/get-datos-cita?contenedor=${containerNumber}`)
-    }
+    }, getCorrelative({ basculaNumber, companyNumber }) {
+        return axios.get(`${baseUrl}/get-correlativo?empresa=${companyNumber}&bascula=${basculaNumber}`)
+    }, createLocalCycleRegistry({ headerCycle,
+        headerCycleDate,
+        headerCompany,
+        headerLicenseNumber,
+        headerLicenseCountry,
+        headerPilot,
+        headerPlateCountry,
+        headerPlateNumber,
+        headerObservation,
+        headerTruckType,
+        headerEntryDate,
+        headerEntryHour,
+        //movements
+        movementRegistryNumber,
+        movementEntryWeight,
+        movementExitWeight,
+        movementEntryDate,
+        movementEntryTime,
+        movementExitDate,
+        movementExitTime,
+        movementEntryBascName,
+        movementEntryBascNumber,
+        movementExitBascName,
+        movementExitBascNumber,
+        movementEntryBoleta,
+        movementExitBoleta,
+        movementEntryTicket,
+        movementExitTicket,
+        //container
+        containerNumber,
+        containerTaraWeight,
+        containerLoadNetWeight,
+        containerShip,
+        containerLoadType,
+        containerObservations,
+        //policy
+        policyDucaNumber,
+        policyBlNumber,
+        policyCosignee,
+        policyManifest,
+        policyNumber,
+        policyWeight, }) {
+        return axios.post(`${baseUrl}/ingreso_peso-local`, {
+            fecha_ciclo: headerCycleDate,
+            num_ciclo: headerCycle,
+            correlativo: movementRegistryNumber,
+            identif_contenedor: containerNumber,
+            peso_tara_contened: containerTaraWeight,
+            peso_entrada: movementEntryWeight,
+            fecha_pesaje_entrada: movementEntryDate,
+            ticket_entrada: movementEntryTicket,
+            bascula_entrada: movementEntryBascNumber,
+            empresa_entrada: movementEntryBascName,
+            peso_salida: movementExitWeight,
+            fecha_pesaje_salida: movementExitDate,
+            ticket_salida: movementExitTicket,
+            bascula_salida: movementExitBascNumber,
+            empresa_salida: movementExitBascName,
+            nombre_transportista: headerCompany,
+            nombre_piloto: headerPilot,
+            cod_pais_piloto: headerLicenseCountry,
+            numero_licencia_piloto: headerLicenseNumber,
+            cod_pais_placa: headerPlateCountry,
+            numero_placa: headerPlateNumber,
+            descripcion: headerObservation,
+            tamano: 0,
+            indicador_tabla: containerLoadType,
+        })
+    },
+    createCycleRegistry({ weightDevice, headerCycle, headerCycleDate, movementRegistryNumber, weight, boleta, date, weightType, machine, observation, taraWeight, ticket, containerNumber }) {
+        return axios.post(`${baseUrl}/ingreso_peso`, {
+            empresa: 25,
+            bascula: weightDevice,
+            numero: headerCycle,
+            fecha_ciclo: headerCycleDate,
+            numero_registro: movementRegistryNumber,
+            peso: weight,
+            boleta,
+            fecha: date,
+            tipo_pesaje: weightType,
+            maquina: machine,
+            observacion: observation,
+            tara: taraWeight,
+            ticket,
+            contenedor: containerNumber
+        })
+    },
 
 }
