@@ -174,7 +174,7 @@
       <div class="row mt-1">
         <div class="col">
           <div class="row">
-            <label class="mb-2 text-black fw-bold">Peso Entrada</label>
+            <label class="mb-2 text-black fw-bold">Peso E.</label>
             <div class="col">
               <input
                 type="text"
@@ -188,15 +188,7 @@
 
         <div class="col">
           <div class="row">
-            <label class="mb-2 text-black fw-bold">Tiempo Entrada</label>
-            <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementEntryDate"
-              />
-            </div>
+            <label class="mb-2 text-black fw-bold">Fecha E.</label>
             <div class="col">
               <input
                 type="text"
@@ -209,7 +201,20 @@
         </div>
         <div class="col">
           <div class="row">
-            <label class="mb-2 text-black fw-bold">Bascula Entrada</label>
+            <label class="mb-2 text-black fw-bold">Hora E.</label>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                readonly
+                v-model="movementEntryTime"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <label class="mb-2 text-black fw-bold">Empresa E.</label>
             <div class="col">
               <input
                 type="text"
@@ -218,6 +223,11 @@
                 v-model="movementEntryBascName"
               />
             </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <label class="mb-2 text-black fw-bold">Bascula E.</label>
             <div class="col">
               <input
                 type="text"
@@ -230,7 +240,7 @@
         </div>
         <div class="col">
           <div class="row">
-            <label class="mb-2 text-black fw-bold">Boleta Entrada</label>
+            <label class="mb-2 text-black fw-bold">Boleta E.</label>
             <div class="col">
               <input
                 type="text"
@@ -243,7 +253,7 @@
         </div>
         <div class="col">
           <div class="row">
-            <label class="mb-2 text-black fw-bold">Ticket Entrada</label>
+            <label class="mb-2 text-black fw-bold">Ticket E.</label>
             <div class="col">
               <input
                 type="text"
@@ -257,7 +267,7 @@
       <div class="row mt-1 border-bottom pb-2">
         <div class="col">
           <div class="row">
-            <label class="mb-2 text-black fw-bold">Peso Salida</label>
+            <label class="mb-2 text-black fw-bold">Peso S.</label>
             <div class="col">
               <input
                 type="text"
@@ -270,15 +280,7 @@
         </div>
         <div class="col">
           <div class="row">
-            <label class="mb-2 text-black fw-bold">Tiempo Salida</label>
-            <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementExitDate"
-              />
-            </div>
+            <label class="mb-2 text-black fw-bold">Fecha S.</label>
             <div class="col">
               <input
                 type="text"
@@ -289,9 +291,24 @@
             </div>
           </div>
         </div>
+
         <div class="col">
           <div class="row">
-            <label class="mb-2 text-black fw-bold">Bascula Salida</label>
+            <label class="mb-2 text-black fw-bold">Tiempo S.</label>
+
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                readonly
+                v-model="movementExitTime"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <label class="mb-2 text-black fw-bold">Empresa S.</label>
             <div class="col">
               <input
                 type="text"
@@ -300,6 +317,12 @@
                 v-model="movementExitBascName"
               />
             </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <label class="mb-2 text-black fw-bold">Bascula S.</label>
+
             <div class="col">
               <input
                 type="text"
@@ -312,7 +335,7 @@
         </div>
         <div class="col">
           <div class="row">
-            <label class="mb-2 text-black fw-bold">Boleta Salida</label>
+            <label class="mb-2 text-black fw-bold">Boleta S.</label>
             <div class="col">
               <input
                 type="text"
@@ -325,7 +348,7 @@
         </div>
         <div class="col">
           <div class="row">
-            <label class="mb-2 text-black fw-bold">Ticket Salida</label>
+            <label class="mb-2 text-black fw-bold">Ticket S.</label>
             <div class="col">
               <input
                 type="text"
@@ -523,9 +546,7 @@
         </div>
       </div>
     </section>
-    <div
-      class="row text-center mt-4 justify-content-center gap-3 overflow-auto p-2"
-    >
+    <div class="row text-center mt-4 justify-content-center gap-3 p-2">
       <div class="btn-group" role="group">
         <button
           type="button"
@@ -547,6 +568,7 @@
           type="button"
           class="btn btn-lg btn-primary"
           @click="goUpARegistryNumber"
+          :disabled="isLoading"
         >
           Siguiente
         </button>
@@ -554,26 +576,70 @@
           type="button"
           class="btn btn-lg btn-primary"
           @click="getHeaderAndWeightData(false)"
+          :disabled="isLoading"
         >
           Ultimo
         </button>
       </div>
+      <div class="btn-group" role="group"></div>
 
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-warning btn-lg" @click="resetData">
+        <button
+          type="button"
+          class="btn btn-warning btn-lg"
+          @click="resetData"
+          :disabled="isLoading"
+        >
           Limpiar
         </button>
         <button type="button" class="btn btn-success btn-lg">Guardar</button>
-        <button type="button" class="btn btn-info btn-lg" @click="checkWeight">
+        <!-- <button
+          type="button"
+          class="btn btn-info btn-lg"
+          @click="checkWeight"
+          :disabled="isLoading"
+        >
           Pesar
         </button>
         <button
           type="button"
           class="btn btn-info btn-lg"
           @click="checkAppointment"
+          :disabled="isLoading"
         >
           Verificar Cita
-        </button>
+        </button> -->
+        <div class="btn-group" style="width: 33%">
+          <button
+            type="button"
+            class="btn btn-info btn-lg dropdown-toggle"
+            :disabled="isLoading"
+            @click="actionsMenuActive = !actionsMenuActive"
+          >
+            Opciones
+          </button>
+          <div
+            :class="`dropdown-menu actions-menu ${
+              actionsMenuActive ? 'show' : null
+            }`"
+          >
+            <a
+              class="dropdown-item actions-menu-item"
+              style="cursor: pointer"
+              @click="checkWeight"
+              >Pesar</a
+            >
+            <a
+              class="dropdown-item actions-menu-item"
+              style="cursor: pointer"
+              @click="checkAppointment"
+              >Verificar Cita</a
+            >
+            <a class="dropdown-item actions-menu-item" style="cursor: pointer"
+              >Imprimir Ticket</a
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -587,12 +653,18 @@ import {
   linearToast,
   linearConfirmationAlert,
 } from "@/utils/swalAlerts";
-import { splitDate } from "@/utils/timeUtils";
+import {
+  getFormattedDate,
+  getFormattedTime,
+  splitDate,
+} from "@/utils/timeUtils";
 export default {
   data: () => ({
     isLoading: false,
     lastCycle: 1,
     VGM: "",
+    weightDirection: null,
+    actionsMenuActive: false,
     //header
     headerCycle: null,
     headerCycleDate: null,
@@ -778,12 +850,67 @@ export default {
     setBlNumber({ BL }) {
       this.policyBlNumber = BL;
     },
-    setNewWeightData() {
+    setNewWeightData(weight, correlative) {
       const { weightDirection } = this;
-
-      console.log("weightDirection", weightDirection);
+      const basculaNumber = localStorage.getItem("bascula");
+      if (weightDirection === "ENTRADA") {
+        this.movementEntryBascName = "NEPORSA";
+        this.movementEntryBascNumber = basculaNumber;
+        this.movementEntryBoleta = correlative;
+        this.movementEntryDate = getFormattedDate();
+        this.movementEntryTime = getFormattedTime();
+        this.movementEntryWeight = weight;
+      } else if (weightDirection === "SALIDA") {
+        this.movementExitBascName = "NEPORSA";
+        this.movementExitBascNumber = basculaNumber;
+        this.movementExitBoleta = correlative;
+        this.movementExitDate = getFormattedDate();
+        this.movementExitTime = getFormattedTime();
+        this.movementExitWeight = weight;
+      } else {
+        return new Error("No se ha detectado dirección de peso correcta");
+      }
     },
-    getNewWeightData() {},
+    getNewWeightData() {
+      const { weightDirection } = this;
+      const machine = localStorage.getItem("maquina");
+
+      if (weightDirection === "ENTRADA") {
+        return {
+          bascula: this.movementEntryBascName,
+          basculaNumber: this.movementEntryBascNumber,
+          boletaNumber: this.movementEntryBoleta,
+          date: this.movementEntryDate,
+          time: this.movementEntryTime,
+          weight: this.movementEntryWeight,
+          machine,
+          registryNumber: this.movementRegistryNumber,
+          weightType: weightDirection,
+          observation: this.containerObservations,
+          tara: this.containerTaraWeight,
+          ticket: this.movementEntryTicket,
+          container: this.containerNumber,
+        };
+      } else if (weightDirection === "SALIDA") {
+        return {
+          bascula: this.movementExitBascName,
+          basculaNumber: this.movementExitBascNumber,
+          boletaNumber: this.movementExitBoleta,
+          date: this.movementExitDate,
+          time: this.movementExitTime,
+          weight: this.movementExitWeight,
+          machine,
+          registryNumber: this.movementRegistryNumber,
+          weightType: weightDirection,
+          observation: this.containerObservations,
+          tara: this.containerTaraWeight,
+          ticket: this.movementExitTicket,
+          container: this.containerNumber,
+        };
+      } else {
+        return new Error("No se ha detectado dirección de peso correcta");
+      }
+    },
     async getCycle() {
       if (this.isCycleNumberSet) {
         const { headerCycle } = this;
@@ -937,8 +1064,9 @@ export default {
           setContainerData(weightData);
           setMovementData(weightData);
         }
-
         await linearToast(`Recopilación de datos de ciclo exitoso!`, "success");
+        await linearToast(`Recopilando información de peso`, "warning");
+        await this.checkWeight();
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.error(error);
@@ -1126,12 +1254,15 @@ export default {
       this.getHeaderAndWeightData(false, false);
     },
     async checkWeight() {
+      this.isLoading = true;
       try {
         const basculaNumber = localStorage.getItem("bascula");
+        const username = localStorage.getItem("username");
+
         const { data } = await weightService.weight({ basculaNumber });
         // eslint-disable-next-line
         const [peso, maquina] = data.split("-");
-
+        localStorage.setItem("maquina", maquina);
         if (peso) {
           const formattedPeso_Carga = (Number.parseFloat(peso) / 1000).toFixed(
             3
@@ -1145,9 +1276,26 @@ export default {
           );
 
           if (isConfirmed) {
-            const correlative = await this.getCorrelative();
-            console.log("correlative", correlative);
-            this.setNewWeightData();
+            const { CORRELATIVO: correlative } = await this.getCorrelative();
+            await linearToast(
+              `Atención, recopilando información de nuevo registro de peso`,
+              "warning"
+            );
+            this.setWeightDirection();
+            this.setNewWeightData(formattedPeso_Carga, correlative);
+            const isNewDataCorrect =
+              await this.confirmNewCycleWeightRegistryData();
+            if (isNewDataCorrect) {
+              await cycleService.createLocalCycleRegistry({
+                machine: maquina,
+                username,
+                ...this.$data,
+              });
+              await linearToast(
+                `Registro de peso en local exitoso!`,
+                "success"
+              );
+            } else this.cleanNewWeightData();
           } else this.checkWeight();
         } else {
           await linearAlert(
@@ -1157,8 +1305,11 @@ export default {
           );
         }
       } catch (error) {
+        this.isLoading = false;
         console.error("Error in checkWeight:", error);
         await linearAlert("ERROR", "An unexpected error occurred", "error");
+      } finally {
+        this.isLoading = false;
       }
     },
     async createCycleRegistry() {
@@ -1178,6 +1329,73 @@ export default {
         this.isLoading = false;
       }
     },
+    async confirmNewCycleWeightRegistryData() {
+      const weightData = this.getNewWeightData();
+      const dataHtml = `
+              <p><strong>Bascula:</strong> ${weightData.bascula || ""}</p>
+              <p><strong>Número de Bascula:</strong> ${
+                weightData.basculaNumber || ""
+              }</p>
+              <p><strong>Número de Boleta:</strong> ${
+                weightData.boletaNumber || ""
+              }</p>
+              <p><strong>Fecha:</strong> ${weightData.date || ""}</p>
+              <p><strong>Hora:</strong> ${weightData.time || ""}</p>
+              <p><strong>Peso:</strong> ${weightData.weight || ""}</p>
+              <p><strong>Computadora:</strong> ${weightData.machine || ""}</p>
+              <p><strong>Numero de Registro:</strong> ${
+                weightData.registryNumber || ""
+              }</p>
+              <p><strong>Tipo de Pesaje:</strong> ${
+                weightData.weightType || ""
+              }</p> 
+              <p><strong>Observación:</strong> ${
+                weightData.observation || ""
+              }</p>
+              <p><strong>Tara:</strong> ${weightData.tara || ""}</p>
+              <p><strong>Ticket:</strong> ${weightData.ticket || ""}</p>
+              <p><strong>Contenedor:</strong> ${weightData.container || ""}</p>
+            `;
+
+      const { isConfirmed } = await linearConfirmationAlert(
+        `Confirmar los siguientes datos a guardar`,
+        null,
+        "warning",
+        "Guardar",
+        "Cancelar",
+        dataHtml
+      );
+      return isConfirmed;
+    },
+    cleanNewWeightData() {
+      const { weightDirection } = this;
+      if (weightDirection === "ENTRADA") {
+        this.movementEntryBascName = null;
+        this.movementEntryBascNumber = null;
+        this.movementEntryBoleta = null;
+        this.movementEntryDate = null;
+        this.movementEntryTime = null;
+        this.movementEntryWeight = null;
+      } else if (weightDirection === "SALIDA") {
+        this.movementExitBascName = null;
+        this.movementExitBascNumber = null;
+        this.movementExitBoleta = null;
+        this.movementExitDate = null;
+        this.movementExitTime = null;
+        this.movementExitWeight = null;
+      } else {
+        return new Error("No se ha detectado dirección de peso correcta");
+      }
+    },
+    setWeightDirection() {
+      const { movementEntryWeight, movementExitWeight } = this;
+      this.weightDirection =
+        movementEntryWeight === "0"
+          ? "ENTRADA"
+          : movementExitWeight === "0"
+          ? "SALIDA"
+          : "NINGUNO";
+    },
   },
   computed: {
     isCycleNumberSet() {
@@ -1196,15 +1414,7 @@ export default {
       return this.policyDucaNumber;
     },
     isGoBackARegistryNumberPossible() {
-      return this.movementRegistryNumber > 1;
-    },
-    weightDirection() {
-      const { movementEntryWeight, movementExitWeight } = this;
-      return movementEntryWeight === "0"
-        ? "ENTRADA"
-        : movementExitWeight === "0"
-        ? "SALIDA"
-        : "NINGUNO";
+      return !this.isLoading || this.movementRegistryNumber > 1;
     },
     calculatedContainerNetWeight() {
       if (
@@ -1326,7 +1536,19 @@ input:not(.writeable) {
   border: rgb(251, 253, 255);
   font-weight: bold;
 }
+.actions-menu {
+  width: 100%;
+  bottom: 100%;
+  font-size: 1.5rem;
+}
 
+.actions-menu-item {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard */
+}
 .swal2-title {
   font-size: 24px !important; /* Change the size as needed */
 }

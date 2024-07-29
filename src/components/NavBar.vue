@@ -4,7 +4,11 @@
       <div class="container-fluid">
         <div class="d-flex justify-content-center align-items-center">
           <img src="/favicon.png" alt="" style="max-height: 3rem" />
-          <router-link class="navbar-brand ms-2" tag="a" to="/"
+          <router-link
+            class="navbar-brand ms-2"
+            tag="a"
+            to="/"
+            style="cursor: pointer"
             >PQ Pesajes</router-link
           >
         </div>
@@ -34,7 +38,9 @@
             class="nav-item text-danger ms-auto my-2"
             style="list-style-type: none"
           >
-            <div class="nav-link" @click="logoutHandle">Cerrar Sesión</div>
+            <div class="nav-link" @click="logoutHandle" style="cursor: pointer">
+              Cerrar Sesión
+            </div>
           </li>
         </div>
       </div>

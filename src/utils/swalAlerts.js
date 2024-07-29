@@ -1,12 +1,13 @@
 import Swal from "sweetalert2";
 
 
-const linearConfirmationAlert = async (title, text, icon = 'warning', confirmButtonText = 'Confirm', cancelButtonText = 'Cancel') => {
+const linearConfirmationAlert = async (title, text, icon = 'warning', confirmButtonText = 'Confirm', cancelButtonText = 'Cancel', html = null) => {
     return await Swal.fire({
         title: title,
         text: text,
         icon: icon,
         showCancelButton: true,
+        html: html,
         confirmButtonText: confirmButtonText,
         cancelButtonText: cancelButtonText,
         customClass: {
