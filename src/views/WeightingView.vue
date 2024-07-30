@@ -592,7 +592,13 @@
         >
           Limpiar
         </button>
-        <button type="button" class="btn btn-success btn-lg">Guardar</button>
+        <button
+          type="button"
+          class="btn btn-success btn-lg"
+          @click="createCycleRegistry"
+        >
+          Guardar
+        </button>
         <!-- <button
           type="button"
           class="btn btn-info btn-lg"
@@ -635,7 +641,10 @@
               @click="checkAppointment"
               >Verificar Cita</a
             >
-            <a class="dropdown-item actions-menu-item" style="cursor: pointer"
+            <a
+              class="dropdown-item actions-menu-item"
+              style="cursor: pointer"
+              @click="streamTicket"
               >Imprimir Ticket</a
             >
           </div>
@@ -658,6 +667,7 @@ import {
   getFormattedTime,
   splitDate,
 } from "@/utils/timeUtils";
+import { generateTicket } from "@/utils/pdfUtils";
 export default {
   data: () => ({
     isLoading: false,
@@ -1314,14 +1324,20 @@ export default {
     },
     async createCycleRegistry() {
       this.isLoading = true;
-      //validaciones
-      const { checkObject } = this;
-      const { allInputData } = this;
+
       try {
         await linearToast(
           `Atención, ingresando ciclo en base de datos local`,
           "warning"
         );
+        const username = localStorage.getItem("username");
+        const machine = localStorage.getItem("maquina");
+        const { data } = await cycleService.createLocalCycleRegistry({
+          machine,
+          username,
+          ...this.$data,
+        });
+        console.log("local registry response data", data);
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.error(error);
@@ -1395,6 +1411,25 @@ export default {
           : movementExitWeight === "0"
           ? "SALIDA"
           : "NINGUNO";
+    },
+    async streamTicket() {
+      const { weightDirection } = this;
+      if (weightDirection !== "NINGUNO") {
+        try {
+          await linearToast(
+            `Atención, generando ticket ${weightDirection}`,
+            "warning"
+          );
+          const ticketData = generateTicket(this.$data);
+          console.log("ticket data :", ticketData);
+        } catch (error) {
+          await linearAlert("Error", error, "error", 3000, false);
+          console.error(error);
+          return null;
+        }
+      } else {
+        await linearToast(`Por favor ingrese un peso primero`, "error");
+      }
     },
   },
   computed: {
