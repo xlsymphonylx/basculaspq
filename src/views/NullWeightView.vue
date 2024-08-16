@@ -18,7 +18,7 @@
           <div class="col">
             <label class="text-dark m-2 fw-bold">Fecha Ciclo</label>
             <input
-              type="datetime"
+              type="date"
               class="form-control"
               v-model="nullCycleDate"
               :disabled="isLoading"
