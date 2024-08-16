@@ -22,18 +22,23 @@ if [ -d ".git" ]; then
   echo "Adding changes..."
   git add .
 
-  echo "Please enter the commit body (leave empty for none):"
-  read commit_body
-
-  echo "Committing changes..."
-  if [ -z "$commit_body" ]; then
-    git commit -m "Automated Git Push into master"
+  # Check if there are changes to commit
+  if git diff-index --quiet HEAD --; then
+    echo "No changes to commit in frontend directory."
   else
-    git commit -m "Automated Git Push into master" -m "$commit_body"
-  fi
+    echo "Please enter the commit body (leave empty for none):"
+    read commit_body
 
-  echo "Pushing to origin master..."
-  git push origin master
+    echo "Committing changes..."
+    if [ -z "$commit_body" ]; then
+      git commit -m "Automated Git Push into master"
+    else
+      git commit -m "Automated Git Push into master" -m "$commit_body"
+    fi
+
+    echo "Pushing to origin master..."
+    git push origin master
+  fi
 else
   echo "Error: Frontend directory is not a Git repository."
   exit 1
@@ -68,4 +73,3 @@ else
 fi
 
 echo "Deployment complete."
-
