@@ -1305,6 +1305,24 @@ export default {
                 `Registro de peso en local exitoso!`,
                 "success"
               );
+              await linearToast(
+                `Atención, enviando información de ciclo a Portuaria`,
+                "warning"
+              );
+              const { getNewWeightData, weightDirection } = this;
+              await cycleService.createCycleRegistry({
+                weightDevice: basculaNumber,
+                weight: getNewWeightData().weight,
+                boleta: getNewWeightData().boletaNumber,
+                date: getNewWeightData().date,
+                weightType: weightDirection == "SALIDA" ? "S" : "E",
+                machine: maquina,
+                observation: getNewWeightData().observation,
+                taraWeight: getNewWeightData().tara,
+                ticket: getNewWeightData().ticket,
+                containerNumber: getNewWeightData().container,
+                ...this.$data,
+              });
             } else this.cleanNewWeightData();
           } else this.checkWeight();
         } else {
@@ -1364,7 +1382,7 @@ export default {
               }</p>
               <p><strong>Tipo de Pesaje:</strong> ${
                 weightData.weightType || ""
-              }</p> 
+              }</p>
               <p><strong>Observación:</strong> ${
                 weightData.observation || ""
               }</p>
@@ -1436,6 +1454,21 @@ export default {
     isCycleNumberSet() {
       return !!this.headerCycle;
     },
+    getWeight() {
+      const { weightDirection } = this;
+      if (weightDirection === "ENTRADA") {
+        return this.movementEntryWeight;
+      }
+      return this.movementExitWeight;
+    },
+    getBoleta() {
+      const { weightDirection } = this;
+      if (weightDirection === "ENTRADA") {
+        return this.movementEntryBoleta;
+      }
+      return this.movementExitBoleta;
+    },
+
     isCycleNumberAndBlNumberSet() {
       return this.headerCycle && this.policyBlNumber;
     },
@@ -1588,3 +1621,4 @@ input:not(.writeable) {
   font-size: 24px !important; /* Change the size as needed */
 }
 </style>
+

@@ -18,7 +18,7 @@
           <div class="col">
             <label class="text-dark m-2 fw-bold">Fecha Ciclo</label>
             <input
-              type="datetime-local"
+              type="datetime"
               class="form-control"
               v-model="nullCycleDate"
               :disabled="isLoading"
@@ -81,11 +81,12 @@
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 import cycleService from "@/services/cycleService";
+import weightService from "@/services/weightService";
 import { linearAlert, linearToast } from "@/utils/swalAlerts";
-import { formatDateToPortStandard } from "@/utils/timeUtils";
+import { formatDateToMidnightPortStandard } from "@/utils/timeUtils";
 export default {
   data: () => ({
     isLoading: false,
@@ -114,9 +115,15 @@ export default {
           nullRegistryNumber,
           nullWeightingType,
         } = this;
+
+        // eslint-disable-next-line
         const username = localStorage.getItem("username");
         const password = localStorage.getItem("password");
-        const formatedCycleDate = formatDateToPortStandard(nullCycleDate);
+        const basculaNumber = localStorage.getItem("bascula");
+        const { data } = await weightService.weight({ basculaNumber });
+        const [peso, maquina] = data.split("-");
+        const formatedCycleDate =
+          formatDateToMidnightPortStandard(nullCycleDate);
         this.isLoading = true;
         try {
           linearToast("Anulando Pesaje por favor espere", "warning");
@@ -126,6 +133,8 @@ export default {
             nullContainerType,
             nullRegistryNumber,
             nullWeightingType,
+            username,
+            machine: maquina,
           });
           const { TIPO_RESPUESTA } = data;
           if (TIPO_RESPUESTA["RESULTADO"] === "01") {
@@ -194,6 +203,5 @@ export default {
   },
 };
 </script>
-  
-  <style>
-</style>
+
+<style></style>

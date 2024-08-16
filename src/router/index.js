@@ -1,29 +1,36 @@
-import HomeView from "@/views/HomeView.vue"
-import NullWeightView from "@/views/NullWeightView.vue"
-import WeightingView from "@/views/WeightingView.vue"
-import Router from 'vue-router';
-import Vue from 'vue';
+import HomeView from "@/views/HomeView.vue";
+import NullWeightView from "@/views/NullWeightView.vue";
+import WeightingView from "@/views/WeightingView.vue";
+import Router from "vue-router";
+import Vue from "vue";
+import ReportView from "@/views/ReportView.vue";
 
 Vue.use(Router);
 
 export default new Router({
-    mode: 'hash',
-    routes: [
-        {
-            path: '/',
-            name: 'Home',
-            component: HomeView
-        },
-        {
-            path: '/pesaje',
-            name: 'Weighting',
-            component: WeightingView
-        },
-        {
-            path: '/anular-pesaje',
-            name: 'NullWeight',
-            component: NullWeightView
-        },
-        // Add more routes here
-    ]
+  mode: "hash",
+  routes: [
+    {
+      path: "/",
+      name: "Home",
+      component: HomeView,
+    },
+    {
+      path: "/pesaje",
+      name: "Weighting",
+      component: WeightingView,
+    },
+    {
+      path: "/anular-pesaje",
+      name: "NullWeight",
+      component: NullWeightView,
+    },
+    {
+      path: "/reporte",
+      name: "ReportView",
+      component: ReportView,
+    },
+
+    // Add more routes here
+  ],
 });

@@ -26,6 +26,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
+              <router-link class="nav-link" to="/reporte">Reporte</router-link>
+            </li>
+            <li class="nav-item">
               <router-link class="nav-link" to="/pesaje">Pesaje</router-link>
             </li>
             <li class="nav-item">
@@ -60,5 +63,5 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
+
