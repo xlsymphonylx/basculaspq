@@ -21,8 +21,7 @@ export default {
     machine,
   }) {
     return axios.get(
-      `${baseUrl}/anular-pesaje?ciclo=${nullCycle}&fecha=${nullCycleDate}&usuario_crea=${username}&maquina=${machine}&
-        indicador=${nullContainerType}&numero_registro=${nullRegistryNumber}&tipo_pesaje=${nullWeightingType}`
+      `${baseUrl}/anular-pesaje?ciclo=${nullCycle}&fecha=${nullCycleDate}&usuario_crea=${username}&maquina=${machine}&indicador=${nullContainerType}&numero_registro=${nullRegistryNumber}&tipo_pesaje=${nullWeightingType}`
     );
   },
   localNullCycle({ nullCycle, nullCycleDate, username, password }) {
