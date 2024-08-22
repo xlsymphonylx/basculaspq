@@ -1309,18 +1309,19 @@ export default {
                 `Atención, enviando información de ciclo a Portuaria`,
                 "warning"
               );
-              const { getNewWeightData, weightDirection } = this;
+              const { weightDirection } = this;
+              const weightData = this.getNewWeightData();
               await cycleService.createCycleRegistry({
                 weightDevice: basculaNumber,
-                weight: getNewWeightData().weight,
-                boleta: getNewWeightData().boletaNumber,
-                date: getNewWeightData().date,
+                weight: weightData.weight,
+                boleta: weightData.boletaNumber,
+                date: weightData.date,
                 weightType: weightDirection == "SALIDA" ? "S" : "E",
                 machine: maquina,
-                observation: getNewWeightData().observation,
-                taraWeight: getNewWeightData().tara,
-                ticket: getNewWeightData().ticket,
-                containerNumber: getNewWeightData().container,
+                observation: weightData.observation,
+                taraWeight: weightData.tara,
+                ticket: weightData.ticket,
+                containerNumber: weightData.container,
                 ...this.$data,
               });
             } else this.cleanNewWeightData();
@@ -1621,4 +1622,3 @@ input:not(.writeable) {
   font-size: 24px !important; /* Change the size as needed */
 }
 </style>
-
