@@ -153,6 +153,7 @@ export default {
     taraWeight,
     ticket,
     containerNumber,
+    containerLoadType,
   }) {
     return axios.post(`${baseUrl}/ingreso_peso`, {
       empresa: "NEPORSA",
@@ -169,6 +170,7 @@ export default {
       tara: taraWeight,
       ticket: ticket,
       contenedor: containerNumber,
+      indicador: containerLoadType,
     });
   },
 };
