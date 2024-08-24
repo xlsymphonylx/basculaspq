@@ -1311,7 +1311,7 @@ export default {
               );
               const { weightDirection } = this;
               const weightData = this.getNewWeightData();
-              await cycleService.createCycleRegistry({
+              const cycleResponse = await cycleService.createCycleRegistry({
                 weightDevice: basculaNumber,
                 weight: weightData.weight,
                 boleta: weightData.boletaNumber,
@@ -1324,6 +1324,18 @@ export default {
                 containerNumber: weightData.container,
                 ...this.$data,
               });
+              const { TIPO_RESPUESTA } = cycleResponse;
+              if (TIPO_RESPUESTA["RESULTADO"] === "01") {
+                await linearToast(
+                  `Registro de peso en portuaria exitoso!`,
+                  "success"
+                );
+              } else
+                await linearAlert(
+                  "Advertencia",
+                  TIPO_RESPUESTA["DESCRIPCION"],
+                  "warning"
+                );
             } else this.cleanNewWeightData();
           } else this.checkWeight();
         } else {
@@ -1351,11 +1363,46 @@ export default {
         );
         const username = localStorage.getItem("username");
         const machine = localStorage.getItem("maquina");
+        const basculaNumber = localStorage.getItem("bascula");
+        const { weightDirection } = this;
+        const weightData = this.getNewWeightData();
+
         const { data } = await cycleService.createLocalCycleRegistry({
           machine,
           username,
           ...this.$data,
         });
+        await linearToast(`Registro de peso en local exitoso!`, "success");
+        await linearToast(
+          `Atención, ingresando ciclo en base de datos portuaria`,
+          "warning"
+        );
+        const cycleResponse = await cycleService.createCycleRegistry({
+          weightDevice: basculaNumber,
+          weight: weightData.weight,
+          boleta: weightData.boletaNumber,
+          date: weightData.date,
+          weightType: weightDirection == "SALIDA" ? "S" : "E",
+          machine: machine,
+          observation: weightData.observation,
+          taraWeight: weightData.tara,
+          ticket: weightData.ticket,
+          containerNumber: weightData.container,
+          ...this.$data,
+        });
+        const { TIPO_RESPUESTA } = cycleResponse;
+
+        if (TIPO_RESPUESTA["RESULTADO"] === "01") {
+          await linearToast(
+            `Registro de peso en portuaria exitoso!`,
+            "success"
+          );
+        } else
+          await linearAlert(
+            "Advertencia",
+            TIPO_RESPUESTA["DESCRIPCION"],
+            "warning"
+          );
         console.log("local registry response data", data);
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
