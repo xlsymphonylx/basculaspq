@@ -8,22 +8,11 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Ciclo</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control writeable"
-                v-model="headerCycle"
-                :disabled="isLoading"
-                @change="getHeaderAndWeightData"
-                tabindex="1"
-              />
+              <input type="text" class="form-control writeable" v-model="headerCycle" :disabled="isLoading"
+                @change="getHeaderAndWeightData" tabindex="1" />
             </div>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                v-model="headerCycleDate"
-                readonly
-              />
+              <input type="text" class="form-control" v-model="headerCycleDate" readonly />
             </div>
           </div>
         </div>
@@ -31,20 +20,10 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Licencia</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="headerLicenseCountry"
-              />
+              <input type="text" class="form-control" readonly v-model="headerLicenseCountry" />
             </div>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="headerLicenseNumber"
-              />
+              <input type="text" class="form-control" readonly v-model="headerLicenseNumber" />
             </div>
           </div>
         </div>
@@ -54,12 +33,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Transporte</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                v-model="headerCompany"
-                readonly
-              />
+              <input type="text" class="form-control" v-model="headerCompany" readonly />
             </div>
           </div>
         </div>
@@ -67,12 +41,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Piloto</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="headerPilot"
-              />
+              <input type="text" class="form-control" readonly v-model="headerPilot" />
             </div>
           </div>
         </div>
@@ -82,20 +51,10 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Placa</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="headerPlateCountry"
-              />
+              <input type="text" class="form-control" readonly v-model="headerPlateCountry" />
             </div>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="headerPlateNumber"
-              />
+              <input type="text" class="form-control" readonly v-model="headerPlateNumber" />
             </div>
           </div>
         </div>
@@ -103,12 +62,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Observación</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="headerObservation"
-              />
+              <input type="text" class="form-control" readonly v-model="headerObservation" />
             </div>
           </div>
         </div>
@@ -118,20 +72,10 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Ingreso Puerto</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="headerEntryDate"
-              />
+              <input type="text" class="form-control" readonly v-model="headerEntryDate" />
             </div>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="headerEntryHour"
-              />
+              <input type="text" class="form-control" readonly v-model="headerEntryHour" />
             </div>
           </div>
         </div>
@@ -139,12 +83,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Tipo Camión</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="headerTruckType"
-              />
+              <input type="text" class="form-control" readonly v-model="headerTruckType" />
             </div>
           </div>
         </div>
@@ -160,13 +99,8 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Num. Registro</label>
             <div class="col">
-              <input
-                type="number"
-                class="form-control"
-                v-model="movementRegistryNumber"
-                @change="getWeightData"
-                readonly
-              />
+              <input type="number" class="form-control" v-model="movementRegistryNumber" @change="getWeightData"
+                readonly />
             </div>
           </div>
         </div>
@@ -176,12 +110,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Peso E.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementEntryWeight"
-              />
+              <input type="text" class="form-control" readonly v-model="movementEntryWeight" />
             </div>
           </div>
         </div>
@@ -190,12 +119,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Fecha E.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementEntryDate"
-              />
+              <input type="text" class="form-control" readonly v-model="movementEntryDate" />
             </div>
           </div>
         </div>
@@ -203,12 +127,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Hora E.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementEntryTime"
-              />
+              <input type="text" class="form-control" readonly v-model="movementEntryTime" />
             </div>
           </div>
         </div>
@@ -216,12 +135,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Empresa E.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementEntryBascName"
-              />
+              <input type="text" class="form-control" readonly v-model="movementEntryBascName" />
             </div>
           </div>
         </div>
@@ -229,12 +143,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Bascula E.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementEntryBascNumber"
-              />
+              <input type="text" class="form-control" readonly v-model="movementEntryBascNumber" />
             </div>
           </div>
         </div>
@@ -242,12 +151,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Boleta E.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementEntryBoleta"
-              />
+              <input type="text" class="form-control" readonly v-model="movementEntryBoleta" />
             </div>
           </div>
         </div>
@@ -255,11 +159,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Ticket E.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control writeable"
-                v-model="movementEntryTicket"
-              />
+              <input type="text" class="form-control writeable" v-model="movementEntryTicket" />
             </div>
           </div>
         </div>
@@ -269,12 +169,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Peso S.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementExitWeight"
-              />
+              <input type="text" class="form-control" readonly v-model="movementExitWeight" />
             </div>
           </div>
         </div>
@@ -282,12 +177,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Fecha S.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementExitDate"
-              />
+              <input type="text" class="form-control" readonly v-model="movementExitDate" />
             </div>
           </div>
         </div>
@@ -297,12 +187,7 @@
             <label class="mb-2 text-black fw-bold">Tiempo S.</label>
 
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementExitTime"
-              />
+              <input type="text" class="form-control" readonly v-model="movementExitTime" />
             </div>
           </div>
         </div>
@@ -310,12 +195,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Empresa S.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementExitBascName"
-              />
+              <input type="text" class="form-control" readonly v-model="movementExitBascName" />
             </div>
           </div>
         </div>
@@ -324,12 +204,7 @@
             <label class="mb-2 text-black fw-bold">Bascula S.</label>
 
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementExitBascNumber"
-              />
+              <input type="text" class="form-control" readonly v-model="movementExitBascNumber" />
             </div>
           </div>
         </div>
@@ -337,12 +212,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Boleta S.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="movementExitBoleta"
-              />
+              <input type="text" class="form-control" readonly v-model="movementExitBoleta" />
             </div>
           </div>
         </div>
@@ -350,11 +220,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Ticket S.</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control writeable"
-                v-model="movementExitTicket"
-              />
+              <input type="text" class="form-control writeable" v-model="movementExitTicket" />
             </div>
           </div>
         </div>
@@ -371,15 +237,8 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Num. de Contenedor</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control writeable"
-                v-model="containerNumber"
-                tabindex="2"
-                @keyup.enter="checkAppointment"
-                @change="checkAppointment"
-                :disabled="isLoading"
-              />
+              <input type="text" class="form-control writeable" v-model="containerNumber" tabindex="2"
+                @keyup.enter="checkAppointment" @change="checkAppointment" :disabled="isLoading" />
             </div>
           </div>
         </div>
@@ -387,13 +246,8 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Peso Tara</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control writeable"
-                tabindex="3"
-                v-model="containerTaraWeight"
-                :disabled="isLoading"
-              />
+              <input type="text" class="form-control writeable" tabindex="3" v-model="containerTaraWeight"
+                :disabled="isLoading" />
             </div>
           </div>
         </div>
@@ -403,12 +257,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Peso Neto Carga</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="calculatedContainerNetWeight"
-              />
+              <input type="text" class="form-control" readonly v-model="calculatedContainerNetWeight" />
             </div>
           </div>
         </div>
@@ -416,12 +265,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Buque</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="containerShip"
-              />
+              <input type="text" class="form-control" readonly v-model="containerShip" />
             </div>
           </div>
         </div>
@@ -431,12 +275,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Tipo de Carga</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="containerLoadType"
-              />
+              <input type="text" class="form-control" readonly v-model="containerLoadType" />
             </div>
           </div>
         </div>
@@ -444,13 +283,8 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Observaciones</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control writeable"
-                tabindex="4"
-                v-model="containerObservations"
-                :disabled="isLoading"
-              />
+              <input type="text" class="form-control writeable" tabindex="4" v-model="containerObservations"
+                :disabled="isLoading" />
             </div>
           </div>
         </div>
@@ -465,13 +299,8 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">DUCA</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control writeable"
-                :disabled="isLoading"
-                v-model="policyDucaNumber"
-                @change="getDucaAndPolicyData"
-              />
+              <input type="text" class="form-control writeable" :disabled="isLoading" v-model="policyDucaNumber"
+                @change="getDucaAndPolicyData" />
             </div>
           </div>
         </div>
@@ -479,12 +308,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">No. BL</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                v-model="policyBlNumber"
-                readonly
-              />
+              <input type="text" class="form-control" v-model="policyBlNumber" readonly />
             </div>
           </div>
         </div>
@@ -494,12 +318,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Consignatario</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="policyCosignee"
-              />
+              <input type="text" class="form-control" readonly v-model="policyCosignee" />
             </div>
           </div>
         </div>
@@ -507,12 +326,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Manifiesto</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="policyManifest"
-              />
+              <input type="text" class="form-control" readonly v-model="policyManifest" />
             </div>
           </div>
         </div>
@@ -522,12 +336,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Poliza</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="policyNumber"
-              />
+              <input type="text" class="form-control" readonly v-model="policyNumber" />
             </div>
           </div>
         </div>
@@ -535,12 +344,7 @@
           <div class="row">
             <label class="mb-2 text-black fw-bold">Peso</label>
             <div class="col">
-              <input
-                type="text"
-                class="form-control"
-                readonly
-                v-model="policyWeight"
-              />
+              <input type="text" class="form-control" readonly v-model="policyWeight" />
             </div>
           </div>
         </div>
@@ -548,55 +352,29 @@
     </section>
     <div class="row text-center mt-4 justify-content-center gap-3 p-2">
       <div class="btn-group" role="group">
-        <button
-          type="button"
-          class="btn btn-lg btn-primary"
-          @click="gotoFirstRegistryNumber"
-          :disabled="!isGoBackARegistryNumberPossible"
-        >
+        <button type="button" class="btn btn-lg btn-primary" @click="gotoFirstRegistryNumber"
+          :disabled="!isGoBackARegistryNumberPossible">
           Primero
         </button>
-        <button
-          type="button"
-          class="btn btn-lg btn-primary"
-          @click="goBackARegistryNumber"
-          :disabled="!isGoBackARegistryNumberPossible"
-        >
+        <button type="button" class="btn btn-lg btn-primary" @click="goBackARegistryNumber"
+          :disabled="!isGoBackARegistryNumberPossible">
           Anterior
         </button>
-        <button
-          type="button"
-          class="btn btn-lg btn-primary"
-          @click="goUpARegistryNumber"
-          :disabled="isLoading"
-        >
+        <button type="button" class="btn btn-lg btn-primary" @click="goUpARegistryNumber" :disabled="isLoading">
           Siguiente
         </button>
-        <button
-          type="button"
-          class="btn btn-lg btn-primary"
-          @click="getHeaderAndWeightData(false)"
-          :disabled="isLoading"
-        >
+        <button type="button" class="btn btn-lg btn-primary" @click="getHeaderAndWeightData(false)"
+          :disabled="isLoading">
           Ultimo
         </button>
       </div>
       <div class="btn-group" role="group"></div>
 
       <div class="btn-group" role="group">
-        <button
-          type="button"
-          class="btn btn-warning btn-lg"
-          @click="resetData"
-          :disabled="isLoading"
-        >
+        <button type="button" class="btn btn-warning btn-lg" @click="resetData" :disabled="isLoading">
           Limpiar
         </button>
-        <button
-          type="button"
-          class="btn btn-success btn-lg"
-          @click="createCycleRegistry"
-        >
+        <button type="button" class="btn btn-success btn-lg" @click="createCycleRegistry">
           Guardar
         </button>
         <!-- <button
@@ -616,37 +394,16 @@
           Verificar Cita
         </button> -->
         <div class="btn-group" style="width: 33%">
-          <button
-            type="button"
-            class="btn btn-info btn-lg dropdown-toggle"
-            :disabled="isLoading"
-            @click="actionsMenuActive = !actionsMenuActive"
-          >
+          <button type="button" class="btn btn-info btn-lg dropdown-toggle" :disabled="isLoading"
+            @click="actionsMenuActive = !actionsMenuActive">
             Opciones
           </button>
-          <div
-            :class="`dropdown-menu actions-menu ${
-              actionsMenuActive ? 'show' : null
-            }`"
-          >
-            <a
-              class="dropdown-item actions-menu-item"
-              style="cursor: pointer"
-              @click="checkWeight"
-              >Pesar</a
-            >
-            <a
-              class="dropdown-item actions-menu-item"
-              style="cursor: pointer"
-              @click="checkAppointment"
-              >Verificar Cita</a
-            >
-            <a
-              class="dropdown-item actions-menu-item"
-              style="cursor: pointer"
-              @click="streamTicket"
-              >Imprimir Ticket</a
-            >
+          <div :class="`dropdown-menu actions-menu ${actionsMenuActive ? 'show' : null
+            }`">
+            <a class="dropdown-item actions-menu-item" style="cursor: pointer" @click="checkWeight">Pesar</a>
+            <a class="dropdown-item actions-menu-item" style="cursor: pointer" @click="checkAppointment">Verificar
+              Cita</a>
+            <a class="dropdown-item actions-menu-item" style="cursor: pointer" @click="streamTicket">Imprimir Ticket</a>
           </div>
         </div>
       </div>
@@ -932,7 +689,7 @@ export default {
             return PARAMETROS_SALIDA;
           } else
             await linearAlert(
-              "Advertencia",
+              "ERROR PORTUARIA:",
               TIPO_RESPUESTA["DESCRIPCION"],
               "warning"
             );
@@ -958,7 +715,7 @@ export default {
             return PARAMETROS_SALIDA;
           } else
             await linearAlert(
-              "Advertencia",
+              "ERROR PORTUARIA:",
               TIPO_RESPUESTA["DESCRIPCION"],
               "warning"
             );
@@ -984,7 +741,7 @@ export default {
             return PARAMETROS_SALIDA;
           } else
             await linearAlert(
-              "Advertencia",
+              "ERROR PORTUARIA:",
               TIPO_RESPUESTA["DESCRIPCION"],
               "warning"
             );
@@ -1007,7 +764,7 @@ export default {
             return PARAMETROS_SALIDA;
           } else
             await linearAlert(
-              "Advertencia",
+              "ERROR PORTUARIA:",
               TIPO_RESPUESTA["DESCRIPCION"],
               "warning"
             );
@@ -1028,17 +785,23 @@ export default {
       //validaciones
       const { checkRegistryNumber, checkObject } = this;
       try {
+        await linearToast(
+          `PROCESO: Inicia recuperacion de datos de peso y ciclo`,
+          "warning"
+        );
+
+
         if (noSkipHeader) {
           await linearToast(
-            `Atención, recopilando información de ciclo`,
+            `DATOS: Recuperando de datos de ciclo`,
             "warning"
           );
 
           const headerData = await getCycle();
           if (!checkObject(headerData)) {
             await linearAlert(
-              `Advertencia`,
-              `Numero de ciclo ${this.headerCycle}, no valido, abortando`,
+              `ERROR:`,
+              `Numero de ciclo ${this.headerCycle}, no valido`,
               "warning"
             );
             this.resetData();
@@ -1047,14 +810,14 @@ export default {
           setHeaderData(headerData);
         } else {
           await linearToast(
-            `Atención, saltando recopilación de datos de encabezado de ciclo ${this.headerCycle}`,
+            `VALIDACIÓN: Datos de ciclo ${this.headerCycle}, ya se encuentran recuperados`,
             "warning"
           );
         }
         let weightData = await getWeightData();
         if (!checkObject(weightData)) {
           await linearAlert(
-            `Advertencia`,
+            `ERROR:`,
             `No se encontro información de pesajes, movimientos o contenedor con ciclo ${this.headerCycle}, abortando`,
             "warning"
           );
@@ -1066,7 +829,7 @@ export default {
         setMovementData(weightData);
         if (getLastCycle && checkRegistryNumber()) {
           await linearToast(
-            `Atención, numero de registro ${this.movementRegistryNumber}, ya contiene pesajes de salida y entrada, pasando al ultimo registro disponible, registro ${this.lastCycle}`,
+            `VALIDACIÓN: Numero de registro ${this.movementRegistryNumber}, ya contiene pesajes de salida y entrada, pasando al ultimo registro disponible, registro ${this.lastCycle}`,
             "warning"
           );
           this.movementRegistryNumber = this.lastCycle;
@@ -1074,11 +837,11 @@ export default {
           setContainerData(weightData);
           setMovementData(weightData);
         }
-        await linearToast(`Recopilación de datos de ciclo exitoso!`, "success");
-        await linearToast(`Recopilando información de peso`, "warning");
+        await linearToast(`EXITO: Recopilación de datos de ciclo exitoso!`, "success");
+        await linearToast(`DATOS: Recopilando información de peso`, "warning");
         await this.checkWeight();
       } catch (error) {
-        await linearAlert("Error", error, "error", 3000, false);
+        await linearAlert("ERROR:", error, "error", 3000, false);
         console.error(error);
       } finally {
         this.isLoading = false;
@@ -1093,12 +856,12 @@ export default {
       //validaciones
       const { checkObject } = this;
       try {
-        await linearToast(`Atención, recopilando numero de BL`, "warning");
-
+        await linearToast(`PROCESO: Recopilando datos de poliza`, "warning");
+        await linearToast(`DATOS: Recuperando numero de BL`, "warning");
         const blData = await getDucaData();
         if (!checkObject(blData)) {
           await linearAlert(
-            `Advertencia`,
+            `DATOS:`,
             `Numero de duca ${this.policyDucaNumber}, no valido, abortando`,
             "warning"
           );
@@ -1106,13 +869,13 @@ export default {
         }
         setBlNumber(blData);
         await linearToast(
-          `Atención, recopilando datos de poliza con numero de BL ${this.policyBlNumber}`,
+          `DATOS: Recuperando datos de poliza ${this.policyBlNumber}`,
           "warning"
         );
         let policyData = await getPolicyData();
         if (!checkObject(policyData)) {
           await linearAlert(
-            `Advertencia`,
+            `ERROR:`,
             `No se encontro información de poliza, abortando`,
             "warning"
           );
@@ -1121,11 +884,11 @@ export default {
         }
         setPolicyData(policyData);
         await linearToast(
-          `Recopilación de datos de poliza exitoso!`,
+          `EXITO: Recopilación de datos de poliza exitoso!`,
           "success"
         );
       } catch (error) {
-        await linearAlert("Error", error, "error", 3000, false);
+        await linearAlert("ERROR:", error, "error", 3000, false);
         console.error(error);
       } finally {
         this.isLoading = false;
@@ -1141,12 +904,12 @@ export default {
       //datos
       try {
         await linearToast(
-          `Atención, recopilando información de poliza`,
+          `PROCESO: Recopilando información de poliza`,
           "warning"
         );
         const policyData = await getPolicyData();
         setPolicyData(policyData);
-        await linearToast(`Recopilación de datos de ciclo exitoso!`, "success");
+        await linearToast(`EXITO: Recuperacion de datos de ciclo exitoso!`, "success");
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.error(error);
@@ -1167,7 +930,7 @@ export default {
             return PARAMETROS_SALIDA;
           } else
             await linearAlert(
-              "Advertencia",
+              "ERROR PORTUARIA:",
               TIPO_RESPUESTA["DESCRIPCION"],
               "warning"
             );
@@ -1179,7 +942,7 @@ export default {
         }
       } else {
         await linearAlert(
-          "Advertencia",
+          "VALIDACION:",
           "La cita no se pudo verificar por falta de numero de contenedor, por favor ingreselo",
           "warning"
         );
@@ -1194,7 +957,7 @@ export default {
 
       try {
         await linearToast(
-          `Atención, confirmando cita de contenedor`,
+          `PROCESO: confirmando cita de contenedor`,
           "warning"
         );
         const appointmentData = await getAppointment();
@@ -1204,14 +967,14 @@ export default {
         ) {
           if (this.isContainerNumberSet) {
             await linearToast(
-              `Cita de contenedor no encontrada ${this.containerNumber}, proceda`,
+              `EXITO: Cita de contenedor no encontrada ${this.containerNumber}, proceda`,
               "success"
             );
           }
           return;
         } else {
           await linearAlert(
-            `Advertencia`,
+            `VALIDACION:`,
             `Cita de contenedor encontrada ${this.containerNumber}, información de cita ${appointmentData["CITA"]}, pesos ${appointmentData["PESOS"]}`,
             "warning"
           );
@@ -1236,7 +999,7 @@ export default {
           return PARAMETROS_SALIDA;
         } else
           await linearAlert(
-            "Advertencia",
+            "ERROR PORTUARIA:",
             TIPO_RESPUESTA["DESCRIPCION"],
             "warning"
           );
@@ -1288,7 +1051,7 @@ export default {
           if (isConfirmed) {
             const { CORRELATIVO: correlative } = await this.getCorrelative();
             await linearToast(
-              `Atención, recopilando información de nuevo registro de peso`,
+              `PROCESO: Recopilando información de nuevo registro de peso`,
               "warning"
             );
             this.setWeightDirection();
@@ -1302,11 +1065,11 @@ export default {
                 ...this.$data,
               });
               await linearToast(
-                `Registro de peso en local exitoso!`,
+                `EXITO: Registro de peso en local exitoso!`,
                 "success"
               );
               await linearToast(
-                `Atención, enviando información de ciclo a Portuaria`,
+                `PROCESO: Atención, enviando información de ciclo a Portuaria`,
                 "warning"
               );
               const { weightDirection } = this;
@@ -1327,12 +1090,12 @@ export default {
               const { TIPO_RESPUESTA } = cycleResponse;
               if (TIPO_RESPUESTA["RESULTADO"] === "01") {
                 await linearToast(
-                  `Registro de peso en portuaria exitoso!`,
+                  `EXITO: Registro de peso en portuaria exitoso!`,
                   "success"
                 );
               } else
                 await linearAlert(
-                  "Advertencia",
+                  "ERROR PORTUARIA:",
                   TIPO_RESPUESTA["DESCRIPCION"],
                   "warning"
                 );
@@ -1340,7 +1103,7 @@ export default {
           } else this.checkWeight();
         } else {
           await linearAlert(
-            "ERROR AL LEER PESO",
+            "ERROR:",
             "Error al Leer Peso, Intente de Nuevamente",
             "error"
           );
@@ -1348,7 +1111,7 @@ export default {
       } catch (error) {
         this.isLoading = false;
         console.error("Error in checkWeight:", error);
-        await linearAlert("ERROR", "An unexpected error occurred", "error");
+        await linearAlert("ERROR:", error, "error");
       } finally {
         this.isLoading = false;
       }
@@ -1358,7 +1121,7 @@ export default {
 
       try {
         await linearToast(
-          `Atención, ingresando ciclo en base de datos local`,
+          `PROCESO: Ingresando ciclo en base de datos local`,
           "warning"
         );
         const username = localStorage.getItem("username");
@@ -1372,9 +1135,9 @@ export default {
           username,
           ...this.$data,
         });
-        await linearToast(`Registro de peso en local exitoso!`, "success");
+        await linearToast(`EXITO: Registro de peso en local exitoso!`, "success");
         await linearToast(
-          `Atención, ingresando ciclo en base de datos portuaria`,
+          `PROCESO: Atención, ingresando ciclo en base de datos portuaria`,
           "warning"
         );
         const cycleResponse = await cycleService.createCycleRegistry({
@@ -1394,18 +1157,17 @@ export default {
 
         if (TIPO_RESPUESTA["RESULTADO"] === "01") {
           await linearToast(
-            `Registro de peso en portuaria exitoso!`,
+            `EXITO: Registro de peso en portuaria exitoso!`,
             "success"
           );
         } else
           await linearAlert(
-            "Advertencia",
+            "ERROR PORTUARIA:",
             TIPO_RESPUESTA["DESCRIPCION"],
             "warning"
           );
-        console.log("local registry response data", data);
       } catch (error) {
-        await linearAlert("Error", error, "error", 3000, false);
+        await linearAlert("ERROR", error, "error", 3000, false);
         console.error(error);
       } finally {
         this.isLoading = false;
@@ -1415,25 +1177,20 @@ export default {
       const weightData = this.getNewWeightData();
       const dataHtml = `
               <p><strong>Bascula:</strong> ${weightData.bascula || ""}</p>
-              <p><strong>Número de Bascula:</strong> ${
-                weightData.basculaNumber || ""
-              }</p>
-              <p><strong>Número de Boleta:</strong> ${
-                weightData.boletaNumber || ""
-              }</p>
+              <p><strong>Número de Bascula:</strong> ${weightData.basculaNumber || ""
+        }</p>
+              <p><strong>Número de Boleta:</strong> ${weightData.boletaNumber || ""
+        }</p>
               <p><strong>Fecha:</strong> ${weightData.date || ""}</p>
               <p><strong>Hora:</strong> ${weightData.time || ""}</p>
               <p><strong>Peso:</strong> ${weightData.weight || ""}</p>
               <p><strong>Computadora:</strong> ${weightData.machine || ""}</p>
-              <p><strong>Numero de Registro:</strong> ${
-                weightData.registryNumber || ""
-              }</p>
-              <p><strong>Tipo de Pesaje:</strong> ${
-                weightData.weightType || ""
-              }</p>
-              <p><strong>Observación:</strong> ${
-                weightData.observation || ""
-              }</p>
+              <p><strong>Numero de Registro:</strong> ${weightData.registryNumber || ""
+        }</p>
+              <p><strong>Tipo de Pesaje:</strong> ${weightData.weightType || ""
+        }</p>
+              <p><strong>Observación:</strong> ${weightData.observation || ""
+        }</p>
               <p><strong>Tara:</strong> ${weightData.tara || ""}</p>
               <p><strong>Ticket:</strong> ${weightData.ticket || ""}</p>
               <p><strong>Contenedor:</strong> ${weightData.container || ""}</p>
@@ -1475,26 +1232,26 @@ export default {
         movementEntryWeight === "0"
           ? "ENTRADA"
           : movementExitWeight === "0"
-          ? "SALIDA"
-          : "NINGUNO";
+            ? "SALIDA"
+            : "NINGUNO";
     },
     async streamTicket() {
       const { weightDirection } = this;
       if (weightDirection !== "NINGUNO") {
         try {
           await linearToast(
-            `Atención, generando ticket ${weightDirection}`,
+            `PROCESO: Atención, generando ticket ${weightDirection}`,
             "warning"
           );
           const ticketData = generateTicket(this.$data);
           console.log("ticket data :", ticketData);
         } catch (error) {
-          await linearAlert("Error", error, "error", 3000, false);
+          await linearAlert("ERROR:", error, "error", 3000, false);
           console.error(error);
           return null;
         }
       } else {
-        await linearToast(`Por favor ingrese un peso primero`, "error");
+        await linearToast(`VALIDACION: Por favor ingrese un peso primero`, "error");
       }
     },
   },
@@ -1646,12 +1403,14 @@ export default {
 .writeable {
   font-weight: bold;
 }
+
 input:not(.writeable) {
   background-color: rgb(180, 180, 180);
   color: rgb(0, 0, 0);
   border: rgb(251, 253, 255);
   font-weight: bold;
 }
+
 .actions-menu {
   width: 100%;
   bottom: 100%;
@@ -1660,12 +1419,18 @@ input:not(.writeable) {
 
 .actions-menu-item {
   cursor: pointer;
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Standard */
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Standard */
 }
+
 .swal2-title {
-  font-size: 24px !important; /* Change the size as needed */
+  font-size: 24px !important;
+  /* Change the size as needed */
 }
 </style>

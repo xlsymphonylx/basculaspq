@@ -4,9 +4,9 @@
 set -e
 
 # Define paths
-SRC_DIR="/projects/basculaspq/frontend/dist/"
-DEST_DIR="/projects/basculaspq/prod/"
-FRONTEND_DIR="/projects/basculaspq/frontend"
+SRC_DIR="/projects/basculas-stack/frontend/dist/"
+DEST_DIR="/projects/basculas-stack/prod/"
+FRONTEND_DIR="/projects/basculas-stack/frontend"
 
 # Get the current git user
 git_user=$(git config user.name)

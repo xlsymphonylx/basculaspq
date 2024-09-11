@@ -66,6 +66,7 @@ export default {
 *::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
 body {
   width: 100vw !important;
   background-image: url("~/public/puerto-quetzal.png");
@@ -78,6 +79,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   padding: 0rem 2rem;
@@ -87,14 +89,19 @@ body {
   max-width: 100%;
   max-height: 100%;
   display: flex;
-  align-items: flex-start; /* Align items to the top */
+  align-items: flex-start;
+  /* Align items to the top */
   justify-content: center;
   overflow: auto;
 }
+
 .content {
-  max-width: 100%; /* Ensure content doesn't overflow horizontally */
-  max-height: 100%; /* Ensure content doesn't overflow vertically */
-  overflow: auto; /* Allow inner content to be scrollable if needed */
+  max-width: 100%;
+  /* Ensure content doesn't overflow horizontally */
+  max-height: 100%;
+  /* Ensure content doesn't overflow vertically */
+  overflow: auto;
+  /* Allow inner content to be scrollable if needed */
   margin: auto;
 }
 </style>
