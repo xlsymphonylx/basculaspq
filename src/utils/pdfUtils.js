@@ -95,7 +95,11 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: `${movementExitTicket}-${new Date().getFullYear()}`,
+      text: `${
+        (movementExitTicket ?? "--": movementExitTicket) +
+        "-" +
+        new Date().getFullYear()
+      }`,
       style: "bodyText",
     },
     {
