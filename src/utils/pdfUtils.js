@@ -36,6 +36,7 @@ const generateTicket = (
     movementExitTime,
     movementEntryBascName,
     movementEntryBascNumber,
+    movementExitBascName,
     movementExitBascNumber,
 
     movementEntryTicket,
@@ -108,6 +109,10 @@ const generateTicket = (
     },
     {
       text: `BASCULA: ${movementExitBascNumber}`,
+      style: "bodyText",
+    },
+    {
+      text: `EMPRESA: ${movementExitBascName}`,
       style: "bodyText",
     },
     {
@@ -301,7 +306,7 @@ const generateTicket = (
       style: "header",
     },
     {
-      text: `VGM: ${VGM} Kg`,
+      text: `VGM: ${VGM ?? 0} Kg`,
       style: "header",
     },
     {

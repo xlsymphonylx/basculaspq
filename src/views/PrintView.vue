@@ -116,6 +116,7 @@ export default {
         movementExitTime: exitDate["TIME"],
         movementEntryBascName: data["empresa_entrada"],
         movementEntryBascNumber: data["bascula_entrada"],
+        movementExitBascName: data["empresa_salida"],
         movementExitBascNumber: data["bascula_salida"],
 
         movementEntryTicket: data["ticket_entrada"],
