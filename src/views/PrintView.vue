@@ -63,9 +63,10 @@ export default {
           correlative,
         });
         console.log("data from axios", data);
+        const pesajeData = data["pesaje"];
         await linearAlert("Exito", "Ingresado con exito", "success");
         const qrData = ``;
-        printPDF(data, qrData);
+        printPDF(pesajeData, qrData);
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.error(error);
@@ -132,24 +133,24 @@ export default {
             fontSize: 14,
             alignment: "center",
             bold: true,
-            margin: [10, 10, 10, 10],
+            margin: [0, 0, 0, 0],
           },
           subheader: {
             fontSize: 12,
             alignment: "center",
             bold: true,
-            margin: [10, 10, 10, 10],
+            margin: [0, 0, 0, 0],
           },
           spacer: {
             fontSize: 10,
             bold: true,
             alignment: "center",
-            margin: [10, 10, 10, 10],
+            margin: [0, 0, 0, 0],
           },
           bodyText: {
             fontSize: 10,
             alignment: "center",
-            margin: [10, 10, 10, 10],
+            margin: [0, 0, 0, 0],
           },
         },
       };
