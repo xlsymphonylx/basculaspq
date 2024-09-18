@@ -128,25 +128,25 @@ export default {
         styles: {
           header: {
             fontSize: 14,
-            alignment: "left",
+            alignment: "center",
             bold: true,
             margin: [30, 2, 0, 0],
           },
           subheader: {
             fontSize: 12,
-            alignment: "left",
+            alignment: "center",
             bold: true,
             margin: [30, 2, 0, 0],
           },
           spacer: {
             fontSize: 10,
             bold: true,
-            alignment: "left",
+            alignment: "center",
             margin: [10, 10, 10, 10],
           },
           bodyText: {
             fontSize: 10,
-            alignment: "left",
+            alignment: "center",
             margin: [30, 2, 0, 0],
           },
         },
