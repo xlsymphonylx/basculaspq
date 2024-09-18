@@ -89,54 +89,55 @@ export default {
       const pdfFonts = require("pdfmake/build/vfs_fonts");
       const entryDate = splitDate(data["fecha_pesaje_entrada"]);
       const exitDate = splitDate(data["fecha_pesaje_salida"]);
+      const pdfData = {
+        username,
+        weightDirection: data["tipo_operacion"],
+        correlative: data["no_registro"],
+        VGM: data["vgm"],
+        //header
+        headerCycle: data["num_ciclo"],
+        headerCycleDate: data["fecha_ciclo"],
+        headerCompany: data["nombre_transportista"],
+        headerLicenseNumber: data["numero_licencia_piloto"],
+        headerLicenseCountry: data["cod_pais_placa"],
+        headerPilot: data["nombre_piloto"],
+        headerPlateCountry: data["cod_pais_placa"],
+        headerPlateNumber: data["numero_placa"],
+        headerObservation: data["observacion_ciclo"],
+        //movements
+        movementRegistryNumber: data["no_registro"],
+        movementEntryWeight: data["peso_entrada"],
+        movementExitWeight: data["peso_salida"],
+        movementEntryDate: entryDate["DATE"],
+        movementEntryTime: entryDate["TIME"],
+        movementExitDate: exitDate["DATE"],
+        movementEntryBascName: data["empresa_entrada"],
+        movementEntryBascNumber: data["bascula_entrada"],
+        movementExitBascNumber: data["bascula_salida"],
 
+        movementEntryTicket: data["ticket_entrada"],
+        movementExitTicket: data["ticket_salida"],
+        //container
+        containerNumber: data["identif_contenedor"],
+        containerTaraWeight: data["peso_tara_contened"],
+      };
+      console.log("pdfData", pdfData);
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
       const docDefinition = {
         pageMargins: [0, 0, 0, 0],
-        content: generateTicket({
-          username,
-          weightDirection: data["tipo_operacion"],
-          correlative: data["no_registro"],
-          VGM: data["vgm"],
-          //header
-          headerCycle: data["num_ciclo"],
-          headerCycleDate: data["fecha_ciclo"],
-          headerCompany: data["nombre_transportista"],
-          headerLicenseNumber: data["numero_licencia_piloto"],
-          headerLicenseCountry: data["cod_pais_placa"],
-          headerPilot: data["nombre_piloto"],
-          headerPlateCountry: data["cod_pais_placa"],
-          headerPlateNumber: data["numero_placa"],
-          headerObservation: data["observacion_ciclo"],
-          //movements
-          movementRegistryNumber: data["no_registro"],
-          movementEntryWeight: data["peso_entrada"],
-          movementExitWeight: data["peso_salida"],
-          movementEntryDate: entryDate["DATE"],
-          movementEntryTime: entryDate["TIME"],
-          movementExitDate: exitDate["DATE"],
-          movementEntryBascName: data["empresa_entrada"],
-          movementEntryBascNumber: data["bascula_entrada"],
-          movementExitBascNumber: data["bascula_salida"],
-
-          movementEntryTicket: data["ticket_entrada"],
-          movementExitTicket: data["ticket_salida"],
-          //container
-          containerNumber: data["identif_contenedor"],
-          containerTaraWeight: data["peso_tara_contened"],
-        }),
+        content: generateTicket(pdfData),
         styles: {
           header: {
             fontSize: 14,
             alignment: "center",
             bold: true,
-            margin: [30, 2, 0, 0],
+            margin: [10, 10, 10, 10],
           },
           subheader: {
             fontSize: 12,
             alignment: "center",
             bold: true,
-            margin: [30, 2, 0, 0],
+            margin: [10, 10, 10, 10],
           },
           spacer: {
             fontSize: 10,
@@ -147,7 +148,7 @@ export default {
           bodyText: {
             fontSize: 10,
             alignment: "center",
-            margin: [30, 2, 0, 0],
+            margin: [10, 10, 10, 10],
           },
         },
       };
