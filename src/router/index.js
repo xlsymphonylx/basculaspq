@@ -4,6 +4,7 @@ import WeightingView from "@/views/WeightingView.vue";
 import Router from "vue-router";
 import Vue from "vue";
 import ReportView from "@/views/ReportView.vue";
+import PrintView from "@/views/PrintView.vue";
 
 Vue.use(Router);
 
@@ -19,6 +20,11 @@ export default new Router({
       path: "/pesaje",
       name: "Weighting",
       component: WeightingView,
+    },
+    {
+      path: "/ticket",
+      name: "PrintView",
+      component: PrintView,
     },
     {
       path: "/anular-pesaje",

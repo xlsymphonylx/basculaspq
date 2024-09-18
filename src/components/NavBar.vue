@@ -36,6 +36,11 @@
                 >Anulación de Pesaje</router-link
               >
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/ticket"
+                >Generacion de Ticket</router-link
+              >
+            </li>
           </ul>
           <li
             class="nav-item text-danger ms-auto my-2"
@@ -64,4 +69,3 @@ export default {
 </script>
 
 <style></style>
-

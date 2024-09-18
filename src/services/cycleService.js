@@ -8,6 +8,11 @@ export default {
       `${baseUrl}/get-local-ciclo?username=${username}&password=${password}&numero_ciclo=${cycle}&fecha=${date}&correlativo=${correlative}`
     );
   },
+  getLocalCycleInNewDB({ cycle, date, correlative }) {
+    return axios.get(
+      `${secondaryUrl}/get?numero_ciclo=${cycle}&fecha=${date}&correlativo=${correlative}`
+    );
+  },
   getCycle({ cycle }) {
     return axios.get(`${baseUrl}/get-datos-ciclo?numero_ciclo=${cycle}`);
   },

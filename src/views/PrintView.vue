@@ -36,10 +36,10 @@
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 import cycleService from "@/services/cycleService";
-import { ticketEntryPDF, ticketOutPDF } from "@/utils/pdfUtils";
+import { generateTicket } from "@/utils/pdfUtils";
 import { linearAlert } from "@/utils/swalAlerts";
 
 export default {
@@ -54,13 +54,9 @@ export default {
     },
     async getCycleData() {
       try {
-        const username = localStorage.getItem("username");
-        const password = localStorage.getItem("password");
         const { date, cycle, correlative, transformDate, printPDF } = this;
         const transformedDate = transformDate(date);
-        const { data } = await cycleService.getLocalCycle({
-          username,
-          password,
+        const { data } = await cycleService.getLocalCycleInNewDB({
           date: transformedDate,
           cycle,
           correlative,
@@ -98,9 +94,7 @@ export default {
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
       const docDefinition = {
         pageMargins: [0, 0, 0, 0],
-        content: data.FECHA_PESAJE_2
-          ? ticketOutPDF(data, qrData)
-          : ticketEntryPDF(data, qrData),
+        content: generateTicket(data),
         styles: {
           header: {
             fontSize: 14,
@@ -136,6 +130,6 @@ export default {
   },
 };
 </script>
-  
-  <style>
-</style>
+
+<style></style>
+
