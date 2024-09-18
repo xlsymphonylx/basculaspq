@@ -57,9 +57,7 @@ export default {
       try {
         const { date, cycle, correlative, transformDate, printPDF } = this;
         const transformedDate = transformDate(date);
-        const {
-          data: { pesaje: pesajeData },
-        } = await cycleService.getLocalCycleInNewDB({
+        const { data } = await cycleService.getLocalCycleInNewDB({
           date: transformedDate,
           cycle,
           correlative,
@@ -67,7 +65,7 @@ export default {
         console.log("data from axios", data);
         await linearAlert("Exito", "Ingresado con exito", "success");
         const qrData = ``;
-        printPDF(pesajeData, qrData);
+        printPDF(data, qrData);
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
         console.error(error);
