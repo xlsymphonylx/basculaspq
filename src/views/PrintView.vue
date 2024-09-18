@@ -41,6 +41,7 @@
 import cycleService from "@/services/cycleService";
 import { generateTicket } from "@/utils/pdfUtils";
 import { linearAlert } from "@/utils/swalAlerts";
+import { splitDate } from "@/utils/timeUtils";
 
 export default {
   data: () => ({
@@ -62,13 +63,7 @@ export default {
           correlative,
         });
         await linearAlert("Exito", "Ingresado con exito", "success");
-        let { data: policyData } = await cycleService.getPolicy({
-          cycle,
-          bl: data["BL"],
-        });
-        policyData = policyData["PARAMETROS_SALIDA"];
-
-        const qrData = `${policyData["POLIZA"]}|${policyData["NUMERO_BL"]}|${policyData["CONSIGNATARIO"]}|${cycle}|${policyData["NUMERO_MANIFIESTO"]}`;
+        const qrData = ``;
         printPDF(data, qrData);
       } catch (error) {
         await linearAlert("Error", error, "error", 3000, false);
@@ -88,13 +83,48 @@ export default {
       return formattedDate;
     },
     printPDF(data, qrData) {
+      const username = localStorage.getItem("username");
+
       const pdfMake = require("pdfmake/build/pdfmake");
       const pdfFonts = require("pdfmake/build/vfs_fonts");
+      const entryDate = splitDate(data["fecha_pesaje_entrada"]);
+      const exitDate = splitDate(data["fecha_pesaje_salida"]);
 
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
       const docDefinition = {
         pageMargins: [0, 0, 0, 0],
-        content: generateTicket(data),
+        content: generateTicket({
+          username,
+          weightDirection: data["tipo_operacion"],
+          correlative: data["no_registro"],
+          VGM: data["vgm"],
+          //header
+          headerCycle: data["num_ciclo"],
+          headerCycleDate: data["fecha_ciclo"],
+          headerCompany: data["nombre_transportista"],
+          headerLicenseNumber: data["numero_licencia_piloto"],
+          headerLicenseCountry: data["cod_pais_placa"],
+          headerPilot: data["nombre_piloto"],
+          headerPlateCountry: data["cod_pais_placa"],
+          headerPlateNumber: data["numero_placa"],
+          headerObservation: data["observacion_ciclo"],
+          //movements
+          movementRegistryNumber: data["no_registro"],
+          movementEntryWeight: data["peso_entrada"],
+          movementExitWeight: data["peso_salida"],
+          movementEntryDate: entryDate["DATE"],
+          movementEntryTime: entryDate["TIME"],
+          movementExitDate: exitDate["DATE"],
+          movementEntryBascName: data["empresa_entrada"],
+          movementEntryBascNumber: data["bascula_entrada"],
+          movementExitBascNumber: data["bascula_salida"],
+
+          movementEntryTicket: data["ticket_entrada"],
+          movementExitTicket: data["ticket_salida"],
+          //container
+          containerNumber: data["identif_contenedor"],
+          containerTaraWeight: data["peso_tara_contened"],
+        }),
         styles: {
           header: {
             fontSize: 14,
