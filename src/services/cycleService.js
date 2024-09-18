@@ -10,7 +10,7 @@ export default {
   },
   getLocalCycleInNewDB({ cycle, date, correlative }) {
     return axios.get(
-      `${secondaryUrl}/get?numero_ciclo=${cycle}&fecha=${date}&correlativo=${correlative}`
+      `${secondaryUrl}/api/get?numero_ciclo=${cycle}&fecha=${date}&correlativo=${correlative}`
     );
   },
   getCycle({ cycle }) {
