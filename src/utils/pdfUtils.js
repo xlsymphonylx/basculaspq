@@ -317,6 +317,7 @@ const generateTicket = (
     // }
     // Additional content can be added here
   ];
+  console.log('weightDirection === "ENTRADA" ? entryTicket : exitTicket',weightDirection === "ENTRADA" ? entryTicket : exitTicket);
   return weightDirection === "ENTRADA" ? entryTicket : exitTicket;
 };
 export { generateTicket };
