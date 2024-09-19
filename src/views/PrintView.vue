@@ -121,9 +121,13 @@ export default {
 
         movementEntryTicket: data["ticket_entrada"],
         movementExitTicket: data["ticket_salida"],
+
+        movementEntryBoleta: data['boleta_entrada'],
+        movementExitBoleta : data['boleta_salida'],
         //container
         containerNumber: data["identif_contenedor"],
         containerTaraWeight: data["peso_tara_contened"],
+
       };
       console.log("pdfData", pdfData);
       pdfMake.vfs = pdfFonts.pdfMake.vfs;

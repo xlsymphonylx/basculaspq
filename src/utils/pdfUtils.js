@@ -41,6 +41,8 @@ const generateTicket = (
 
     movementEntryTicket,
     movementExitTicket,
+    movementEntryBoleta,
+    movementExitBoleta,
     //container
     containerNumber,
     containerTaraWeight,
@@ -58,7 +60,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: `${(correlative ?? "0") + "-" + new Date().getFullYear()}`,
+      text: `${(movementEntryBoleta ?? "0") + "-" + new Date().getFullYear()}`,
       style: "bodyText",
     },
     {
@@ -96,7 +98,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: `${(movementExitTicket ?? "0") + "-" + new Date().getFullYear()}`,
+      text: `${(movementExitBoleta ?? "0") + "-" + new Date().getFullYear()}`,
       style: "bodyText",
     },
     {
@@ -197,7 +199,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: "OBSERVACIONES",
+      // text: "OBSERVACIONES"
       style: "bodyText",
     },
     {
