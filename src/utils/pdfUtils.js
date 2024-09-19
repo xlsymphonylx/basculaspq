@@ -306,10 +306,6 @@ const generateTicket = (
       style: "header",
     },
     {
-      text: `VGM: ${VGM ?? 0} Kg`,
-      style: "header",
-    },
-    {
       text: "\n",
       style: "",
     },
