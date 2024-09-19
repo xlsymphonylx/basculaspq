@@ -93,8 +93,7 @@ export default {
     movementExitBoleta,
     movementEntryTicket,
     movementExitTicket,
-    movementEntryBoleta,
-    movementExitBoleta,
+
     //container
     containerNumber,
     containerTaraWeight,
