@@ -222,7 +222,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: containerNumber,
+      text: containerNumber || '0',
       style: "bodyText",
     },
     {
