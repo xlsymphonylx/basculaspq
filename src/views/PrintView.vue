@@ -161,10 +161,14 @@ export default {
         },
       };
 
-      pdfMake.createPdf(docDefinition).getBlob((blob) => {
+      try {
+        pdfMake.createPdf(docDefinition).getBlob((blob) => {
         const url = URL.createObjectURL(blob);
         window.open(url);
       });
+      } catch (error) {
+        console.error('error', error);        
+      }
     },
   },
 };
