@@ -93,6 +93,8 @@ export default {
     movementExitBoleta,
     movementEntryTicket,
     movementExitTicket,
+    movementEntryBoleta,
+    movementExitBoleta,
     //container
     containerNumber,
     containerTaraWeight,
@@ -142,6 +144,8 @@ export default {
       observacion_contenedor: containerObservations,
       tipo_contenedor: containerLoadType,
       tipo_operacion: weightDirection,
+      boleta_entrada: movementEntryBoleta,
+      boleta_salida: movementExitBoleta,
     });
   },
   createCycleRegistry({

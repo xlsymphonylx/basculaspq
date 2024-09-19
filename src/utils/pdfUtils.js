@@ -58,7 +58,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: `${correlative}-${new Date().getFullYear()}`,
+      text: `${(correlative ?? "0") + "-" + new Date().getFullYear()}`,
       style: "bodyText",
     },
     {
@@ -96,7 +96,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: `${(movementExitTicket ?? "--") + "-" + new Date().getFullYear()}`,
+      text: `${(movementExitTicket ?? "0") + "-" + new Date().getFullYear()}`,
       style: "bodyText",
     },
     {
