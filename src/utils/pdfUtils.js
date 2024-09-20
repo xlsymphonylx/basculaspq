@@ -60,7 +60,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: `${(movementEntryBoleta ?? "0") + "-" + new Date().getFullYear()}`,
+      text: `${movementEntryBoleta }`,
       style: "bodyText",
     },
     {
@@ -98,7 +98,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: `${(movementExitBoleta ?? "0") + "-" + new Date().getFullYear()}`,
+      text: `${movementExitBoleta}`,
       style: "bodyText",
     },
     {
