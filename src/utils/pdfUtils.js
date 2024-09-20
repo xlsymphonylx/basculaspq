@@ -80,7 +80,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: `TICKET: ${movementEntryTicket}`,
+      text: `TICKET: ${movementEntryTicket ?? "--"} `,
       style: "bodyText",
     },
     {
