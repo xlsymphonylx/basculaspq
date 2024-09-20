@@ -137,26 +137,27 @@ export default {
         styles: {
           header: {
             fontSize: 14,
-            alignment: "left",
+            alignment: "center",
             bold: true,
-            margin: [30, 2, 0, 0],
+            margin: [2, 2, 2, 2]
           },
           subheader: {
             fontSize: 12,
-            alignment: "left",
+            alignment: "center",
             bold: true,
-            margin: [30, 2, 0, 0],
+            margin: [2, 2, 2, 2]
           },
           spacer: {
             fontSize: 10,
             bold: true,
-            alignment: "left",
-            margin: [10, 10, 10, 10],
+            alignment: "center",
+            margin: [2, 2, 2, 2]
           },
           bodyText: {
             fontSize: 10,
-            alignment: "left",
-            margin: [30, 2, 0, 0],
+            bold: false,
+            alignment: "center",
+            margin: [2, 2, 2, 2]
           },
         },
       };
