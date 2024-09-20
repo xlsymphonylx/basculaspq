@@ -139,24 +139,20 @@ export default {
             fontSize: 14,
             alignment: "center",
             bold: true,
-            margin: [0, 0, 0, 0],
           },
           subheader: {
             fontSize: 12,
             alignment: "center",
             bold: true,
-            margin: [0, 0, 0, 0],
           },
           spacer: {
             fontSize: 10,
             bold: true,
             alignment: "center",
-            margin: [0, 0, 0, 0],
           },
           bodyText: {
             fontSize: 10,
             alignment: "center",
-            margin: [0, 0, 0, 0],
           },
         },
       };
