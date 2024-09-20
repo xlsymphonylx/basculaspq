@@ -298,9 +298,10 @@ const generateTicket = (
     },
     {
       text: `NETO: ${(
-        parseFloat(movementEntryWeight) -
-        (parseFloat(movementExitWeight) + parseFloat(containerTaraWeight))
-      ).toFixed(3)} TM`,
+        Number.parseFloat(movementExitWeight) -
+        (Number.parseFloat(movementEntryWeight) +
+          Number.parseFloat(containerTaraWeight))
+      ).toFixed(2)} TM`,
       style: "header",
     },
     {
