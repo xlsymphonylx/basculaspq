@@ -199,7 +199,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      // text: "OBSERVACIONES"
+      text: "OBSERVACIONES",
       style: "bodyText",
     },
     {
