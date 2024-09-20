@@ -132,27 +132,31 @@ export default {
       console.log("pdfData", pdfData);
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
       const docDefinition = {
-        pageMargins: [0, 0, 0, 0],
+        pageMargins: [1, 1, 1, 1],
         content: generateTicket(pdfData),
         styles: {
           header: {
             fontSize: 14,
             alignment: "center",
             bold: true,
+            margin: [2, 2, 2, 2]
           },
           subheader: {
             fontSize: 12,
             alignment: "center",
             bold: true,
+            margin: [2, 2, 2, 2]
           },
           spacer: {
             fontSize: 10,
             bold: true,
             alignment: "center",
+            margin: [2, 2, 2, 2]
           },
           bodyText: {
             fontSize: 10,
             alignment: "center",
+            margin: [2, 2, 2, 2]
           },
         },
       };
