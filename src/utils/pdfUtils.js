@@ -241,7 +241,7 @@ const generateTicket = (
     },
     {
       text: "NUMERO DE BL",
-      style: "bodyText",
+      style: "header",
     },
     {
       text: `------`,
@@ -257,7 +257,7 @@ const generateTicket = (
     },
     {
       text: "POLIZA",
-      style: "bodyText",
+      style: "header",
     },
     {
       text: `------`,
@@ -273,7 +273,7 @@ const generateTicket = (
     },
     {
       text: "PESO MANIF.",
-      style: "bodyText",
+      style: "header",
     },
     {
       text: `------`,
