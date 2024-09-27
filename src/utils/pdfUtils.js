@@ -217,19 +217,23 @@ const generateTicket = (
       text: `REGISTRO ${movementRegistryNumber}`,
       style: "bodyText",
     },
-    {
-      text: "NUMERO DE CONTENEDOR",
-      style: "bodyText",
-    },
-    {
-      text: containerNumber || "0",
-      style: "bodyText",
-    },
+    ...(containerNumber
+      ? [
+          {
+            text: "NUMERO DE CONTENEDOR",
+            style: "bodyText",
+          },
+          {
+            text: containerNumber || "0",
+            style: "bodyText",
+          },
+        ]
+      : []),
     {
       text: "\n",
       style: "",
     },
-  ];
+  ].filter(Boolean);
   const policyData = [
     {
       text: "PASE SALIDA",
