@@ -60,7 +60,7 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: `${movementEntryBoleta }`,
+      text: `${movementEntryBoleta}`,
       style: "bodyText",
     },
     {
@@ -222,7 +222,61 @@ const generateTicket = (
       style: "bodyText",
     },
     {
-      text: containerNumber || '0',
+      text: containerNumber || "0",
+      style: "bodyText",
+    },
+    {
+      text: "\n",
+      style: "",
+    },
+  ];
+  const policyData = [
+    {
+      text: "PASE SALIDA",
+      style: "header",
+    },
+    {
+      text: `------`,
+      style: "bodyText",
+    },
+    {
+      text: "NUMERO DE BL",
+      style: "bodyText",
+    },
+    {
+      text: `------`,
+      style: "bodyText",
+    },
+    {
+      text: "MANIFIESTO",
+      style: "header",
+    },
+    {
+      text: `------`,
+      style: "bodyText",
+    },
+    {
+      text: "POLIZA",
+      style: "bodyText",
+    },
+    {
+      text: `------`,
+      style: "bodyText",
+    },
+    {
+      text: "CONSIGNATARIO",
+      style: "header",
+    },
+    {
+      text: `------`,
+      style: "bodyText",
+    },
+    {
+      text: "PESO MANIF.",
+      style: "bodyText",
+    },
+    {
+      text: `------`,
       style: "bodyText",
     },
     {
@@ -304,6 +358,7 @@ const generateTicket = (
       ).toFixed(2)} TM`,
       style: "header",
     },
+    ...policyData,
     {
       text: "CERTIFICADO: BRM-CC-42473/19",
       style: "header",
@@ -318,8 +373,10 @@ const generateTicket = (
     // }
     // Additional content can be added here
   ];
-  console.log('weightDirection === "ENTRADA" ? entryTicket : exitTicket',weightDirection === "ENTRADA" ? entryTicket : exitTicket);
+  console.log(
+    'weightDirection === "ENTRADA" ? entryTicket : exitTicket',
+    weightDirection === "ENTRADA" ? entryTicket : exitTicket
+  );
   return weightDirection === "ENTRADA" ? entryTicket : exitTicket;
 };
 export { generateTicket };
-
