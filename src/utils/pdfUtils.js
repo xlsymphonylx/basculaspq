@@ -358,6 +358,10 @@ const generateTicket = (
       ).toFixed(2)} TM`,
       style: "header",
     },
+    {
+      text: "\n",
+      style: "",
+    },
     ...policyData,
     {
       text: "CERTIFICADO: BRM-CC-42473/19",
