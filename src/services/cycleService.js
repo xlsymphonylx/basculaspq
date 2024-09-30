@@ -164,7 +164,7 @@ export default {
     containerLoadType,
   }) {
     return axios.post(`${baseUrl}/ingreso_peso`, {
-      empresa: "NEPORSA",
+      empresa: 25,
       bascula: weightDevice,
       numero: headerCycle,
       fecha_ciclo: headerCycleDate,
