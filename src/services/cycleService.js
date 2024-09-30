@@ -157,10 +157,10 @@ export default {
     date,
     weightType,
     machine,
-    observation,
+    observation = " ",
     taraWeight,
-    ticket,
-    containerNumber,
+    ticket = "0",
+    containerNumber = null,
     containerLoadType,
   }) {
     return axios.post(`${baseUrl}/ingreso_peso`, {
