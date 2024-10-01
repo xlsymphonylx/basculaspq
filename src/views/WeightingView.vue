@@ -621,6 +621,7 @@ export default {
       const { weightDirection } = this;
       const basculaNumber = localStorage.getItem("bascula");
       if (weightDirection === "ENTRADA") {
+        console.log('weightDirection === "ENTRADA"');
         this.movementEntryBascName = "NEPORSA";
         this.movementEntryBascNumber = basculaNumber;
         this.movementEntryBoleta = correlative;
@@ -628,6 +629,7 @@ export default {
         this.movementEntryTime = getFormattedTime();
         this.movementEntryWeight = weight;
       } else if (weightDirection === "SALIDA") {
+        console.log('weightDirection === "SALIDA"');
         this.movementExitBascName = "NEPORSA";
         this.movementExitBascNumber = basculaNumber;
         this.movementExitBoleta = correlative;
@@ -1130,7 +1132,7 @@ export default {
         const { weightDirection } = this;
         const weightData = this.getNewWeightData();
 
-        const { data } = await cycleService.createLocalCycleRegistry({
+        await cycleService.createLocalCycleRegistry({
           machine,
           username,
           ...this.$data,
