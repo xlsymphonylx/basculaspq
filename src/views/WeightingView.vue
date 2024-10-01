@@ -621,13 +621,17 @@ export default {
       const { weightDirection } = this;
       const basculaNumber = localStorage.getItem("bascula");
       if (weightDirection === "ENTRADA") {
-        console.log('weightDirection === "ENTRADA"');
+      
         this.movementEntryBascName = "NEPORSA";
         this.movementEntryBascNumber = basculaNumber;
         this.movementEntryBoleta = correlative;
         this.movementEntryDate = getFormattedDate();
         this.movementEntryTime = getFormattedTime();
         this.movementEntryWeight = weight;
+        console.log('this.movementEntryDate',this.movementEntryDate);
+        console.log('this.movementEntryTime',this.movementEntryTime);
+        console.log('this.movementEntryWeight',this.movementEntryWeight );
+        console.log('this.movementEntryBoleta',this.movementEntryBoleta );
       } else if (weightDirection === "SALIDA") {
         console.log('weightDirection === "SALIDA"');
         this.movementExitBascName = "NEPORSA";
@@ -636,6 +640,10 @@ export default {
         this.movementExitDate = getFormattedDate();
         this.movementExitTime = getFormattedTime();
         this.movementExitWeight = weight;
+        console.log('this.movementExitDate',this.movementExitDate);
+        console.log('this.movementExitTime',this.movementExitTime);
+        console.log('this.movementExitWeight',this.movementExitWeight );
+        console.log('this.movementExitBoleta',this.movementExitBoleta );
       } else {
         return new Error("No se ha detectado dirección de peso correcta");
       }
