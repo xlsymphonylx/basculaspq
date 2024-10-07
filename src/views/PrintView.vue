@@ -122,53 +122,61 @@ export default {
         movementEntryTicket: data["ticket_entrada"],
         movementExitTicket: data["ticket_salida"],
 
-        movementEntryBoleta: data['boleta_entrada'],
-        movementExitBoleta : data['boleta_salida'],
+        movementEntryBoleta: data["boleta_entrada"],
+        movementExitBoleta: data["boleta_salida"],
         //container
         containerNumber: data["identif_contenedor"],
         containerTaraWeight: data["peso_tara_contened"],
-
       };
       console.log("pdfData", pdfData);
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
       const docDefinition = {
-        pageMargins: [1, 1, 1, 1],
+        pageSize: {
+          width: 200, // Set custom width (in points, 1pt = 1/72 inch)
+          height: 400, // Set custom height
+        },
+
+        // Set landscape orientation if needed
+        pageOrientation: "portrait",
+
+        // Reduce margins for a more compact layout
+        pageMargins: [10, 10, 10, 10], // Minimal margins
         content: generateTicket(pdfData),
         styles: {
           header: {
             fontSize: 14,
             alignment: "center",
             bold: true,
-            margin: [2, 2, 2, 2]
+            margin: [2, 2, 2, 2],
           },
           subheader: {
             fontSize: 12,
             alignment: "center",
             bold: true,
-            margin: [2, 2, 2, 2]
+            margin: [2, 2, 2, 2],
           },
           spacer: {
             fontSize: 10,
             bold: true,
             alignment: "center",
-            margin: [2, 2, 2, 2]
+            margin: [2, 2, 2, 2],
           },
           bodyText: {
             fontSize: 10,
             bold: false,
             alignment: "center",
-            margin: [2, 2, 2, 2]
+            margin: [2, 2, 2, 2],
           },
         },
       };
 
       try {
         pdfMake.createPdf(docDefinition).getBlob((blob) => {
-        const url = URL.createObjectURL(blob);
-        window.open(url);
-      });
+          const url = URL.createObjectURL(blob);
+          window.open(url);
+        });
       } catch (error) {
-        console.error('error', error);        
+        console.error("error", error);
       }
     },
   },
@@ -176,4 +184,3 @@ export default {
 </script>
 
 <style></style>
-
