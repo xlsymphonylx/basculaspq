@@ -163,6 +163,9 @@ export default {
     containerNumber = null,
     containerLoadType,
   }) {
+    console.log('fecha de ciclo port', fecha);
+    console.log('boleta de ciclo port', boleta);
+
     return axios.post(`${baseUrl}/ingreso_peso`, {
       empresa: 25,
       bascula: weightDevice,
