@@ -1412,19 +1412,20 @@ export default {
           containerNumber: weightData.container,
           ...this.$data,
         });
-        const { TIPO_RESPUESTA } = cycleResponse;
+        console.log("cycleResponse", cycleResponse);
+        // const { TIPO_RESPUESTA } = cycleResponse;
 
-        if (TIPO_RESPUESTA["RESULTADO"] === "01") {
-          await linearToast(
-            `EXITO: Registro de peso en portuaria exitoso!`,
-            "success"
-          );
-        } else
-          await linearAlert(
-            "ERROR PORTUARIA:",
-            TIPO_RESPUESTA["DESCRIPCION"],
-            "warning"
-          );
+        // if (TIPO_RESPUESTA["RESULTADO"] === "01") {
+        //   await linearToast(
+        //     `EXITO: Registro de peso en portuaria exitoso!`,
+        //     "success"
+        //   );
+        // } else
+        //   await linearAlert(
+        //     "ERROR PORTUARIA:",
+        //     TIPO_RESPUESTA["DESCRIPCION"],
+        //     "warning"
+        //   );
       } catch (error) {
         await linearAlert("ERROR", error, "error", 3000, false);
         console.error(error);
