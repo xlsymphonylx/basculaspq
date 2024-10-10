@@ -871,7 +871,6 @@ export default {
         this.movementEntryTime = getFormattedTime();
         this.movementEntryWeight = weight;
       } else if (weightDirection === "SALIDA") {
-        console.log('weightDirection === "SALIDA"');
         this.movementExitBascName = "NEPORSA";
         this.movementExitBascNumber = basculaNumber;
         this.movementExitBoleta = correlative;
@@ -1317,6 +1316,7 @@ export default {
               );
               const { weightDirection } = this;
               const weightData = this.getNewWeightData();
+              console.log(weightData);
               const cycleResponse = await cycleService.createCycleRegistry({
                 weightDevice: basculaNumber,
                 weight: weightData.weight,
@@ -1330,18 +1330,19 @@ export default {
                 containerNumber: weightData.container,
                 ...this.$data,
               });
-              const { TIPO_RESPUESTA } = cycleResponse;
-              if (TIPO_RESPUESTA["RESULTADO"] === "01") {
-                await linearToast(
-                  `EXITO: Registro de peso en portuaria exitoso!`,
-                  "success"
-                );
-              } else
-                await linearAlert(
-                  "ERROR PORTUARIA:",
-                  TIPO_RESPUESTA["DESCRIPCION"],
-                  "warning"
-                );
+              console.log("cycleResponse", cycleResponse);
+              // const { TIPO_RESPUESTA } = cycleResponse;
+              // if (TIPO_RESPUESTA["RESULTADO"] === "01") {
+              //   await linearToast(
+              //     `EXITO: Registro de peso en portuaria exitoso!`,
+              //     "success"
+              //   );
+              // } else
+              // await linearAlert(
+              //   "ERROR PORTUARIA:",
+              //   TIPO_RESPUESTA["DESCRIPCION"],
+              //   "warning"
+              // );
             } else this.cleanNewWeightData();
           } else this.checkWeight();
         } else {
@@ -1386,19 +1387,6 @@ export default {
           `PROCESO: Atención, ingresando ciclo en base de datos portuaria`,
           "warning"
         );
-        console.log("Data enviada a Servidor python", {
-          weightDevice: basculaNumber,
-          weight: weightData.weight,
-          boleta: weightData.boletaNumber,
-          date: weightData.date,
-          weightType: weightDirection == "SALIDA" ? "S" : "E",
-          machine: machine,
-          observation: weightData.observation,
-          taraWeight: weightData.tara,
-          ticket: weightData.ticket,
-          containerNumber: weightData.container,
-          ...this.$data,
-        });
         const cycleResponse = await cycleService.createCycleRegistry({
           weightDevice: basculaNumber,
           weight: weightData.weight,
